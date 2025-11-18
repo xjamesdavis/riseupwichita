@@ -1,1 +1,833 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rise Up Wichita - Local Job Board</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      background: #0f172a;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .section { display: none; }
+    .section.active { display: block; }
+    .hero-bg { position: relative; min-height: 100vh; overflow: hidden; }
+    .hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; z-index: 1;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at center, rgba(15,23,42,0.2), rgba(15,23,42,0.85));
+      z-index: 2;
+    }
+    .hero-content { position: relative; z-index: 3; }
+    .hero-text { text-shadow: 0 0 20px rgba(15,23,42,0.9); }
+    .nav-glass {
+      background: rgba(15,23,42,0.9);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(148,163,184,0.4);
+      box-shadow: 0 10px 30px rgba(15,23,42,0.7);
+    }
+    .card-3d {
+      background: #ffffff;
+      border-radius: 1rem;
+      border: 1px solid rgba(148,163,184,0.4);
+      box-shadow: 0 12px 30px rgba(15,23,42,0.18);
+    }
+    .btn-3d {
+      position: relative;
+      border: none;
+      transition: all 0.2s ease;
+      box-shadow:
+        0 10px 25px rgba(0,0,0,0.35),
+        0 2px 6px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.25);
+    }
+    .btn-3d:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow:
+        0 16px 32px rgba(0,0,0,0.45),
+        0 4px 10px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.4);
+    }
+    .btn-3d:active {
+      transform: translateY(1px) scale(0.99);
+      box-shadow:
+        0 6px 15px rgba(0,0,0,0.3),
+        0 2px 4px rgba(0,0,0,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .toast {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #ffffff;
+      background: #16a34a;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.25s ease;
+      z-index: 100;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .toast.error {
+      background: #dc2626;
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 50;
+    }
+  </style>
+</head>
+<body class="min-h-full">
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 w-full z-40 nav-glass">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-red-500 to-yellow-400 flex items-center justify-center text-white font-bold shadow-lg">
+            RU
+          </div>
+          <div>
+            <h1 class="text-lg sm:text-xl font-bold text-white">Rise Up Wichita</h1>
+            <p class="text-xs text-blue-200 hidden sm:block">Opportunity • Support • Community</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button onclick="showSection('home')" class="text-sm text-slate-200 hover:text-red-300 px-3 py-1 rounded-full hover:bg-white/10 transition">
+            Home
+          </button>
+          <button onclick="showSection('jobs')" class="text-sm text-slate-200 hover:text-red-300 px-3 py-1 rounded-full hover:bg-white/10 transition">
+            Jobs
+          </button>
+          <button onclick="showSection('seekers')" class="text-sm text-slate-200 hover:text-red-300 px-3 py-1 rounded-full hover:bg-white/10 transition">
+            Job Seekers
+          </button>
+          <button onclick="guardResumeBuilder()" class="text-sm text-slate-200 hover:text-red-300 px-3 py-1 rounded-full hover:bg-white/10 transition hidden sm:inline-block">
+            Resume Builder
+          </button>
+
+          <!-- Logged-out -->
+          <div id="auth-logged-out" class="flex items-center gap-2">
+            <button onclick="openLoginModal()" class="text-sm text-slate-200 hover:text-white px-3 py-1 rounded-full hover:bg-white/10 transition">
+              Login
+            </button>
+            <button onclick="openSignupModal()" class="btn-3d bg-red-600 text-white text-sm px-4 py-1 rounded-full">
+              Sign Up
+            </button>
+          </div>
+
+          <!-- Logged-in -->
+          <div id="auth-logged-in" class="hidden flex items-center gap-3">
+            <span class="text-sm text-slate-100">
+              <span id="user-name-nav" class="font-semibold">User</span>
+              <span id="user-type-nav" class="text-xs text-slate-300 ml-1">(Job Seeker)</span>
+            </span>
+            <button id="nav-postjob" onclick="showSection('postjob')" class="hidden btn-3d bg-blue-600 text-xs text-white px-3 py-1 rounded-full">
+              Post a Job
+            </button>
+            <button onclick="logout()" class="text-xs text-red-300 hover:text-red-400 px-3 py-1 rounded-full hover:bg-red-900/40 transition">
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HOME / HERO -->
+  <main id="home-section" class="section active">
+    <div class="hero-bg flex items-center justify-center text-center text-white">
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="https://s3.us-east-2.amazonaws.com/wichita.video.2/wichita+2.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content w-full max-w-5xl mx-auto px-4 pt-32 pb-24">
+        <h2 class="text-sm tracking-[0.28em] uppercase text-blue-200 mb-5 hero-text">
+          Wichita, Kansas • The Air Capital of the World
+        </h2>
+        <h1 class="hero-text text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+          Connect Wichita's Workforce
+        </h1>
+        <p class="hero-text text-lg sm:text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+          A local-first job board helping Wichita residents build careers, earn great pay, and keep money in the community.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+          <button onclick="showSection('jobs')" class="btn-3d bg-white text-blue-900 px-8 py-3 rounded-full text-lg font-semibold">
+            Browse Local Jobs
+          </button>
+          <button onclick="guardPostJobFromHero()" class="btn-3d bg-red-600 text-white px-8 py-3 rounded-full text-lg font-semibold">
+            Post a Job
+          </button>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-16">
+          <div class="flex flex-col items-center">
+            <div class="w-20 h-20 rounded-full bg-white card-3d flex items-center justify-center mb-3">
+              <div class="text-center">
+                <div id="jobs-count" class="text-2xl font-bold text-blue-800">0</div>
+                <div class="text-xs font-semibold text-blue-700">JOBS</div>
+              </div>
+            </div>
+            <p class="hero-text text-sm font-medium">Open roles in the metro</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-20 h-20 rounded-full bg-white card-3d flex items-center justify-center mb-3">
+              <div class="text-center">
+                <div id="seekers-count" class="text-2xl font-bold text-blue-800">0</div>
+                <div class="text-xs font-semibold text-blue-700">SEEKERS</div>
+              </div>
+            </div>
+            <p class="hero-text text-sm font-medium">Profiles in the system</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-20 h-20 rounded-full bg-white card-3d flex items-center justify-center mb-3">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-red-600">100%</div>
+                <div class="text-xs font-semibold text-blue-700">LOCAL</div>
+              </div>
+            </div>
+            <p class="hero-text text-sm font-medium">Wichita-only opportunities</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURED JOBS -->
+    <section class="bg-white py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-3">Featured Jobs in Wichita</h2>
+          <p class="text-slate-600 text-lg">A quick sample of what’s available right now.</p>
+        </div>
+        <div id="featured-jobs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <div class="text-center mt-8">
+          <button onclick="showSection('jobs')" class="btn-3d bg-blue-600 text-white rounded-full px-8 py-3 font-semibold">
+            View All Jobs
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED SEEKERS -->
+    <section class="bg-blue-50 py-16 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <h2 class="text-3
+</section>
+</main>
+
+<!-- JOBS SECTION -->
+<section id="jobs-section" class="section bg-slate-900 pt-24 pb-16 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl md:text-4xl font-bold mb-3">Available Positions</h2>
+      <p class="text-slate-300 text-lg">Search by title, company, or neighborhood.</p>
+    </div>
+
+    <div class="mb-8 flex flex-wrap gap-3 justify-center">
+      <select id="job-type-filter" class="bg-white text-slate-900 px-4 py-2 rounded-full text-sm border border-slate-300 shadow-sm">
+        <option value="">All Job Types</option>
+        <option value="Full-time">Full-time</option>
+        <option value="Part-time">Part-time</option>
+        <option value="Contract">Contract</option>
+        <option value="Seasonal">Seasonal</option>
+      </select>
+      <input id="job-search" type="text" placeholder="Search jobs..." class="bg-white text-slate-900 px-4 py-2 rounded-full border border-slate-300 shadow-sm w-64 text-sm" />
+      <button onclick="filterJobs()" class="btn-3d bg-red-600 text-white px-6 py-2 rounded-full text-sm font-semibold">
+        Search
+      </button>
+    </div>
+
+    <div id="jobs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <div id="no-jobs" class="text-center text-slate-400 mt-10 hidden">No jobs yet. Be the first to post.</div>
+  </div>
+</section>
+
+<!-- SEEKERS SECTION -->
+<section id="seekers-section" class="section bg-slate-900 pt-24 pb-16 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl md:text-4xl font-bold mb-3">Job Seekers</h2>
+      <p class="text-slate-300 text-lg">Local people ready to work in Wichita.</p>
+    </div>
+
+    <div id="seekers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <div id="no-seekers" class="text-center text-slate-400 mt-10 hidden">No job seekers yet. Encourage your friends to create a profile.</div>
+  </div>
+</section>
+
+<!-- RESUME BUILDER -->
+<section id="resume-section" class="section bg-slate-900 pt-24 pb-16 text-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl md:text-4xl font-bold mb-3">Resume Builder</h2>
+      <p class="text-slate-300 text-lg">Build from scratch, or upload a .txt resume and we’ll auto-fill.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <div class="card-3d p-6 text-slate-900">
+        <h3 class="text-xl font-semibold text-blue-900 mb-4">Your Info</h3>
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-slate-700 mb-1">Upload text resume (.txt)</label>
+          <input id="resume-file" type="file" accept=".txt" class="block w-full text-sm text-slate-700" onchange="handleResumeUpload(event)" />
+        </div>
+
+        <form id="resume-form" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm font-medium text-slate-700 mb-1 block">Full Name *</label>
+              <input id="res-name" required class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm" />
+            </div>
+            <div>
+              <label class="text-sm font-medium text-slate-700 mb-1 block">Email *</label>
+              <input id="res-email" type="email" required class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm font-medium text-slate-700 mb-1 block">Phone</label>
+              <input id="res-phone" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm" />
+            </div>
+            <div>
+              <label class="text-sm font-medium text-slate-700 mb-1 block">Location *</label>
+              <input id="res-location" required class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm" />
+            </div>
+          </div>
+
+          <div>
+            <label class="text-sm font-medium text-slate-700 mb-1 block">Summary *</label>
+            <textarea id="res-summary" required rows="3" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm"></textarea>
+          </div>
+
+          <div>
+            <label class="text-sm font-medium text-slate-700 mb-1 block">Work Experience *</label>
+            <textarea id="res-experience" required rows="4" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm"></textarea>
+          </div>
+
+          <div>
+            <label class="text-sm font-medium text-slate-700 mb-1 block">Education *</label>
+            <textarea id="res-education" required rows="3" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm"></textarea>
+          </div>
+
+          <div>
+            <label class="text-sm font-medium text-slate-700 mb-1 block">Skills *</label>
+            <textarea id="res-skills" required rows="2" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm"></textarea>
+          </div>
+
+          <button class="btn-3d bg-blue-600 text-white w-full rounded-full py-2 mt-2 text-sm font-semibold">
+            Save Profile (demo)
+          </button>
+        </form>
+      </div>
+
+      <div class="card-3d p-6 text-slate-900">
+        <h3 class="text-xl font-semibold text-blue-900 mb-4">Resume Preview</h3>
+        <div id="resume-preview" class="text-sm text-slate-800">
+          <div class="text-center text-slate-400 py-8">Fill the form to see your resume layout.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POST JOB -->
+<section id="postjob-section" class="section bg-slate-900 pt-24 pb-16 text-white">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl md:text-4xl font-bold mb-3">Post a Job</h2>
+      <p class="text-slate-300 text-lg">Connect with Wichita-area talent.</p>
+    </div>
+
+    <div class="card-3d p-6 text-slate-900">
+      <form id="job-form" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Job Title *</label>
+            <input id="job-title" required class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Company Name *</label>
+            <input id="job-company" required class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Location *</label>
+            <input id="job-location" required class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Job Type *</label>
+            <select id="job-type" required class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">
+              <option value="">Select type</option>
+              <option value="Full-time">Full-time</option>
+              <option value="Part-time">Part-time</option>
+              <option value="Contract">Contract</option>
+              <option value="Seasonal">Seasonal</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Salary Range</label>
+          <input id="job-salary" placeholder="$50,000 - $70,000" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Job Description *</label>
+          <textarea id="job-description" required rows="4" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Requirements *</label>
+          <textarea id="job-requirements" required rows="3" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Contact *</label>
+          <input id="job-contact" required class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm" />
+        </div>
+
+        <button class="btn-3d bg-red-600 text-white w-full rounded-full py-2 mt-2 text-sm font-semibold">
+          Post Job (demo)
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- LOGIN MODAL -->
+<div id="login-modal" class="modal-backdrop hidden">
+  <div class="card-3d max-w-md w-full p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-xl font-semibold text-blue-900">Login</h3>
+      <button onclick="closeLoginModal()" class="text-slate-400 hover:text-slate-700 text-2xl leading-none">&times;</button>
+    </div>
+
+    <form id="login-form" class="space-y-4 text-sm text-slate-900">
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Email *</label>
+        <input id="login-email" type="email" required class="w-full px-3 py-2 rounded-lg border border-slate-300" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Password *</label>
+        <input id="login-password" type="password" required class="w-full px-3 py-2 rounded-lg border border-slate-300" />
+      </div>
+      <button class="btn-3d bg-blue-600 text-white w-full rounded-full py-2 font-semibold">Login</button>
+    </form>
+
+    <div class="mt-4">
+      <p class="text-center text-xs text-slate-500">Don't have an account?
+        <button onclick="switchToSignup()" class="text-blue-600 hover:underline">Sign up</button>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- SIGNUP MODAL -->
+<div id="signup-modal" class="modal-backdrop hidden">
+  <div class="card-3d max-w-md w-full p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-xl font-semibold text-blue-900">Create Account</h3>
+      <button onclick="closeSignupModal()" class="text-slate-400 hover:text-slate-700 text-2xl">&times;</button>
+    </div>
+
+    <form id="signup-form" class="space-y-4 text-sm text-slate-900">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <button type="button" id="signup-type-seeker" onclick="setSignupType('seeker')" class="border border-slate-300 rounded-lg px-3 py-2 text-center">
+          <div class="text-2xl mb-1">👤</div>
+          <div class="font-medium text-slate-800">Job Seeker</div>
+        </button>
+
+        <button type="button" id="signup-type-poster" onclick="setSignupType('poster')" class="border border-slate-300 rounded-lg px-3 py-2 text-center">
+          <div class="text-2xl mb-1">🏢</div>
+          <div class="font-medium text-slate-800">Job Poster</div>
+        </button>
+      </div>
+
+      <input type="hidden" id="signup-type" />
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Full Name *</label>
+        <input id="signup-name" required class="w-full px-3 py-2 rounded-lg border border-slate-300" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Email *</label>
+        <input id="signup-email" type="email" required class="w-full px-3 py-2 rounded-lg border border-slate-300" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Password *</label>
+        <input id="signup-password" type="password" required class="w-full px-3 py-2 rounded-lg border border-slate-300" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Location *</label>
+        <input id="signup-location" required class="w-full px-3 py-2 rounded-lg border border-slate-300" />
+      </div>
+
+      <div id="signup-company-wrapper" class="hidden">
+        <label class="block text-sm font-medium text-slate-700 mb-1">Company Name *</label>
+        <input id="signup-company" class="w-full px-3 py-2 rounded-lg border border-slate-300" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">About You / Company</label>
+        <textarea id="signup-bio" rows="3" class="w-full px-3 py-2 rounded-lg border border-slate-300"></textarea>
+      </div>
+
+      <button class="btn-3d bg-red-600 text-white w-full rounded-full py-2 font-semibold">
+        Create Account
+      </button>
+    </form>
+
+    <div class="mt-4 text-center text-xs text-slate-500">
+      Already have an account?
+      <button onclick="switchToLogin()" class="text-blue-600 hover:underline">Login</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<!-- BEGIN PART 3 BELOW -->
+<script>
+/* STORAGE */
+const STORAGE_KEY = "ruw_data_v2";
+let allData = [], jobs = [], seekers = [], users = [];
+let currentUser = null;
+
+function loadAllData() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  allData = raw ? JSON.parse(raw) : [];
+  jobs = allData.filter(d => d.type === "job");
+  seekers = allData.filter(d => d.type === "seeker");
+  users = allData.filter(d => d.type === "user");
+}
+
+function saveAllData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(allData)); }
+
+function addItem(item) {
+  allData.push(item);
+  saveAllData();
+  loadAllData();
+  refreshUI();
+}
+
+function updateItem(item) {
+  const i = allData.findIndex(d => d.id === item.id);
+  if (i >= 0) {
+    allData[i] = item;
+    saveAllData();
+    loadAllData();
+    refreshUI();
+  }
+}
+
+/* FAKE JOBS */
+const sampleJobs = [
+  { id:'j1',type:'job',title:'CNC Machine Operator',company:'Prairie Sky Manufacturing',location:'North Wichita, KS',jobType:'Full-time',salary:'$22 - $29/hr',description:'Operate CNC machinery to produce precision components.',requirements:'Basic CNC experience preferred.',contact:'apply@prairieskymfg.com',createdAt:Date.now()-86400000 },
+  { id:'j2',type:'job',title:'Warehouse Associate',company:'Heartland Logistics Hub',location:'ICT Industrial District',jobType:'Full-time',salary:'$17 - $20/hr',description:'Assist with freight, stocking, and inventory.',requirements:'Lift 50 lbs, forklift a plus.',contact:'jobs@heartlandhub.com',createdAt:Date.now()-172800000 },
+  { id:'j3',type:'job',title:'Member Support Rep',company:'Tallgrass Community Credit Union',location:'Downtown Wichita',jobType:'Full-time',salary:'$18 - $21/hr',description:'Help customers with accounts and payments.',requirements:'Friendly, organized.',contact:'careers@tallgrassccu.com',createdAt:Date.now()-259200000 },
+  { id:'j4',type:'job',title:'HVAC Assistant',company:'ICT Home Services Group',location:'East Wichita, KS',jobType:'Full-time',salary:'$16 - $18/hr',description:'Assist HVAC techs on installs and repairs.',requirements:'Reliable transportation.',contact:'hr@icthomeservices.com',createdAt:Date.now()-345600000 },
+  { id:'j5',type:'job',title:'Sheet Metal Helper',company:'Flint River Fabrication',location:'South Wichita, KS',jobType:'Full-time',salary:'$19 - $24/hr',description:'Support metal fabrication team.',requirements:'Mechanical aptitude.',contact:'shop@flintriverfab.com',createdAt:Date.now()-432000000 },
+  { id:'j6',type:'job',title:'Retail Sales Associate',company:'Red Barn Retail & Outdoors',location:'NewMarket Square Area',jobType:'Part-time',salary:'$14 - $16/hr',description:'Help customers find outdoor gear.',requirements:'Basic sales ability.',contact:'retail@redbarnoutdoors.com',createdAt:Date.now()-518400000 },
+  { id:'j7',type:'job',title:'Classroom Aide',company:'Meadowbrook Learning Center',location:'West Wichita, KS',jobType:'Full-time',salary:'$15 - $17/hr',description:'Assist teachers in daily classroom activities.',requirements:'Enjoy working with kids.',contact:'staff@meadowbrooklc.com',createdAt:Date.now()-604800000 },
+  { id:'j8',type:'job',title:'Delivery Driver',company:'SkyTrail Transport',location:'Wichita Metro Area',jobType:'Contract',salary:'$150 - $230/day',description:'Deliver packages on assigned routes.',requirements:'Valid license.',contact:'dispatch@skytrailtransport.com',createdAt:Date.now()-691200000 },
+  { id:'j9',type:'job',title:'Patient Care Assistant',company:'Sunridge Senior Living',location:'West Wichita, KS',jobType:'Full-time',salary:'$15 - $19/hr',description:'Assist elderly residents with care.',requirements:'Compassionate.',contact:'apply@sunridgesl.com',createdAt:Date.now()-777600000 },
+  { id:'j10',type:'job',title:'IT Support Technician',company:'Clearwater Digital Solutions',location:'Near WSU Tech',jobType:'Full-time',salary:'$19 - $25/hr',description:'Provide technical support to clients.',requirements:'Basic IT knowledge.',contact:'it@clearwaterds.com',createdAt:Date.now()-864000000 }
+];
+
+/* FAKE SEEKERS */
+const sampleSeekers = [
+  {id:'s1',type:'seeker',name:'Jordan M.',role:'Sheet Metal Apprentice',location:'Wichita, KS'},
+  {id:'s2',type:'seeker',name:'Lisa T.',role:'Customer Service Specialist',location:'Wichita, KS'},
+  {id:'s3',type:'seeker',name:'Robert G.',role:'Forklift Operator',location:'Wichita, KS'},
+  {id:'s4',type:'seeker',name:'Tasha B.',role:'Classroom Aide',location:'Wichita, KS'},
+  {id:'s5',type:'seeker',name:'Miguel A.',role:'Auto Service Helper',location:'Wichita, KS'},
+  {id:'s6',type:'seeker',name:'Henry S.',role:'General Laborer',location:'Wichita, KS'},
+  {id:'s7',type:'seeker',name:'Kendra W.',role:'Administrative Assistant',location:'Wichita, KS'},
+  {id:'s8',type:'seeker',name:'Bryan K.',role:'Delivery Driver',location:'Wichita, KS'},
+  {id:'s9',type:'seeker',name:'Elena R.',role:'Home Health Aide',location:'Wichita, KS'},
+  {id:'s10',type:'seeker',name:'Marcus J.',role:'CNC Trainee',location:'Wichita, KS'},
+  {id:'s11',type:'seeker',name:'Shelby P.',role:'Retail Associate',location:'Wichita, KS'},
+  {id:'s12',type:'seeker',name:'Anthony L.',role:'Security Guard',location:'Wichita, KS'},
+  {id:'s13',type:'seeker',name:'Dana F.',role:'Call Center Support',location:'Wichita, KS'},
+  {id:'s14',type:'seeker',name:'Ethan H.',role:'Maintenance Tech',location:'Wichita, KS'},
+  {id:'s15',type:'seeker',name:'Naomi C.',role:'Hospitality Worker',location:'Wichita, KS'}
+];
+
+/* SECTION SWITCHING */
+function showSection(id) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.getElementById(id + "-section").classList.add("active");
+  window.scrollTo(0, 0);
+}
+
+function guardPostJobFromHero() {
+  if (!currentUser || currentUser.type !== "poster") {
+    openSignupModal();
+    setSignupType("poster");
+  } else {
+    showSection("postjob");
+  }
+}
+
+function guardResumeBuilder() {
+  if (!currentUser) {
+    openSignupModal();
+    setSignupType("seeker");
+  } else {
+    showSection("resume");
+  }
+}
+
+/* REFRESH UI */
+function refreshUI() {
+  document.getElementById("jobs-count").innerText = jobs.length;
+  document.getElementById("seekers-count").innerText = seekers.length;
+
+  const fj = document.getElementById("featured-jobs");
+  fj.innerHTML = "";
+  jobs.slice(0, 3).forEach(j => {
+    fj.innerHTML += `
+      <div class="card-3d p-5">
+        <h3 class="text-lg font-bold text-blue-900 mb-1">${j.title}</h3>
+        <p class="text-sm text-slate-700 mb-2">${j.company}</p>
+        <p class="text-xs text-slate-500 mb-3">${j.location}</p>
+        <button onclick="showSection('jobs')" class="btn-3d bg-blue-600 text-white px-3 py-1 text-sm rounded-full">View</button>
+      </div>`;
+  });
+
+  const fs = document.getElementById("featured-seekers");
+  fs.innerHTML = "";
+  seekers.slice(0, 4).forEach(p => {
+    fs.innerHTML += `
+      <div class="card-3d p-5 text-center">
+        <h3 class="font-bold text-blue-900 mb-1">${p.name}</h3>
+        <p class="text-sm text-slate-700 mb-2">${p.role}</p>
+        <p class="text-xs text-slate-500">${p.location}</p>
+      </div>`;
+  });
+
+  const jg = document.getElementById("jobs-grid");
+  jg.innerHTML = "";
+  jobs.forEach(j => {
+    jg.innerHTML += `
+      <div class="card-3d p-5">
+        <h3 class="text-xl font-bold text-blue-900 mb-2">${j.title}</h3>
+        <p class="text-slate-700 mb-1">${j.company}</p>
+        <p class="text-slate-500 text-sm mb-3">${j.location}</p>
+        <button class="btn-3d bg-blue-600 text-white px-4 py-1 rounded-full text-sm" onclick="alert('Contact: ${j.contact}')">Apply</button>
+      </div>`;
+  });
+  document.getElementById("no-jobs").classList.toggle("hidden", jobs.length > 0);
+
+  const sg = document.getElementById("seekers-grid");
+  sg.innerHTML = "";
+  seekers.forEach(p => {
+    sg.innerHTML += `
+      <div class="card-3d p-5">
+        <h3 class="font-bold text-blue-900 mb-1">${p.name}</h3>
+        <p class="text-sm text-slate-700 mb-2">${p.role}</p>
+        <p class="text-xs text-slate-500">${p.location}</p>
+      </div>`;
+  });
+  document.getElementById("no-seekers").classList.toggle("hidden", seekers.length > 0);
+
+  if (currentUser) {
+    document.getElementById("auth-logged-out").classList.add("hidden");
+    document.getElementById("auth-logged-in").classList.remove("hidden");
+
+    document.getElementById("user-name-nav").innerText = currentUser.name;
+    document.getElementById("user-type-nav").innerText = currentUser.type === "poster" ? "(Job Poster)" : "(Job Seeker)";
+
+    document.getElementById("nav-postjob").classList.toggle("hidden", currentUser.type !== "poster");
+  } else {
+    document.getElementById("auth-logged-out").classList.remove("hidden");
+    document.getElementById("auth-logged-in").classList.add("hidden");
+  }
+}
+
+/* JOB FILTER */
+function filterJobs() {
+  const q = document.getElementById("job-search").value.toLowerCase();
+  const t = document.getElementById("job-type-filter").value;
+
+  const filtered = jobs.filter(j =>
+    (j.title.toLowerCase().includes(q) ||
+     j.company.toLowerCase().includes(q) ||
+     j.location.toLowerCase().includes(q)) &&
+    (t === "" || j.jobType === t)
+  );
+
+  const jg = document.getElementById("jobs-grid");
+  jg.innerHTML = "";
+
+  filtered.forEach(j => {
+    jg.innerHTML += `
+      <div class="card-3d p-5">
+        <h3 class="text-xl font-bold text-blue-900 mb-2">${j.title}</h3>
+        <p class="text-slate-700 mb-1">${j.company}</p>
+        <p class="text-slate-500 text-sm mb-3">${j.location}</p>
+        <button class="btn-3d bg-blue-600 text-white px-4 py-1 rounded-full text-sm" onclick="alert('Contact: ${j.contact}')">Apply</button>
+      </div>`;
+  });
+
+  document.getElementById("no-jobs").classList.toggle("hidden", filtered.length > 0);
+}
+
+/* RESUME UPLOAD DEMO */
+function handleResumeUpload(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = function () {
+    const t = r.result;
+    document.getElementById("res-summary").value = t.slice(0, 200);
+  };
+  r.readAsText(f);
+}
+
+document.getElementById("resume-form").addEventListener("submit", e => {
+  e.preventDefault();
+  showToast("Profile saved!");
+});
+
+/* POST JOB */
+document.getElementById("job-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const j = {
+    id: "job_" + Date.now(),
+    type: "job",
+    title: job-title.value,
+    company: job-company.value,
+    location: job-location.value,
+    jobType: job-type.value,
+    salary: job-salary.value,
+    description: job-description.value,
+    requirements: job-requirements.value,
+    contact: job-contact.value,
+    createdAt: Date.now()
+  };
+  addItem(j);
+  showSection("jobs");
+  showToast("Job posted!");
+});
+
+/* LOGIN */
+function openLoginModal() {
+  document.getElementById("login-modal").classList.remove("hidden");
+}
+function closeLoginModal() {
+  document.getElementById("login-modal").classList.add("hidden");
+}
+function openSignupModal() {
+  document.getElementById("signup-modal").classList.remove("hidden");
+}
+function closeSignupModal() {
+  document.getElementById("signup-modal").classList.add("hidden");
+}
+function switchToSignup() {
+  closeLoginModal();
+  openSignupModal();
+}
+function switchToLogin() {
+  closeSignupModal();
+  openLoginModal();
+}
+
+document.getElementById("login-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const em = login-email.value.toLowerCase();
+  const pw = login-password.value;
+  const u = users.find(x => x.email === em && x.password === pw);
+  if (!u) return showToast("Invalid login", "error");
+  currentUser = u;
+  refreshUI();
+  closeLoginModal();
+  showToast("Welcome back!");
+});
+
+/* SIGNUP */
+function setSignupType(t) {
+  document.getElementById("signup-type").value = t;
+  document.getElementById("signup-type-seeker").classList.toggle("border-blue-500", t === "seeker");
+  document.getElementById("signup-type-poster").classList.toggle("border-blue-500", t === "poster");
+  document.getElementById("signup-company-wrapper").classList.toggle("hidden", t !== "poster");
+}
+
+document.getElementById("signup-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const t = signup-type.value || "seeker";
+  const u = {
+    id: "u_" + Date.now(),
+    type: t,
+    name: signup-name.value,
+    email: signup-email.value.toLowerCase(),
+    password: signup-password.value,
+    location: signup-location.value,
+    bio: signup-bio.value
+  };
+  if (t === "poster") u.company = signup-company.value;
+  users.push(u);
+  addItem(u);
+  currentUser = u;
+  refreshUI();
+  closeSignupModal();
+  showToast("Account created!");
+});
+
+/* LOGOUT */
+function logout() {
+  currentUser = null;
+  refreshUI();
+  showToast("Logged out");
+}
+
+/* TOAST */
+function showToast(msg, type = "success") {
+  const t = document.getElementById("toast");
+  t.innerText = msg;
+  t.className = "toast show" + (type === "error" ? " error" : "");
+  setTimeout(() => t.classList.remove("show"), 2000);
+}
+
+/* INITIAL DATA SEED */
+window.onload = function () {
+  loadAllData();
+  if (jobs.length === 0) sampleJobs.forEach(addItem);
+  if (seekers.length === 0) sampleSeekers.forEach(addItem);
+  refreshUI();
+};
+</script>
+
+</body>
+</html>
 
