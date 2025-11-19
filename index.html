@@ -125,3 +125,21 @@
 <script src="assets/app.js" defer></script>
 </body>
 </html>
+<section id="hero" class="hero">
+  <div class="hero-media">
+    <video id="hero-video" muted playsinline loop poster="/assets/hero-poster.jpg" preload="metadata">
+      <source src="https://s3.us-east-2.amazonaws.com/wichita.video.2/wichita+2.mp4" type="video/mp4">
+      <img src="/assets/hero-poster.jpg" alt="RiseUp Wichita" />
+    </video>
+
+    <!-- Play overlay (visible if autoplay blocked) -->
+    <button id="hero-play" class="hero-play" aria-label="Play video" type="button">▶</button>
+  </div>
+
+  <div id="hero-poster" class="hero-poster" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <h1>Local jobs. Real work. Fair pay.</h1>
+    <p class="sub">Professional, simple, and focused on getting people hired fast.</p>
+  </div>
+</section>
