@@ -9,7 +9,10 @@
 <body>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/">RiseUpWichita</a>
+    <a class="brand" href="/">
+      <img src="https://i.imgur.com/pbuYHFM.png" alt="Wichita flag" id="brand-img">
+      <span class="brand-text">RiseUpWichita</span>
+    </a>
     <nav class="main-nav">
       <a href="#jobs">Jobs</a>
       <a href="#profiles">Profiles</a>
@@ -69,7 +72,7 @@
       <label>Last name <input name="last" required></label>
       <label>Email <input name="email" type="email" required></label>
       <label>Primary skill
-        <select name="primary" required>
+        <select name="primary" id="primary-select" required>
           <option value="">Choose a category</option>
           <option>Construction</option>
           <option>Graphic Artist</option>
@@ -81,7 +84,13 @@
           <option>Handyman</option>
         </select>
       </label>
-      <label>Two specialties (comma separated, up to 2) <input name="specialties"></label>
+      <label>Specialty #1
+        <select name="spec1" id="spec1"></select>
+      </label>
+      <label>Specialty #2
+        <select name="spec2" id="spec2"></select>
+      </label>
+      <label>Upload photo (optional) <input name="avatar" id="avatar" type="file" accept="image/*"></label>
       <label>Upload resume (optional) <input name="resume" type="file"></label>
       <div class="form-actions">
         <button type="submit" class="btn primary">Create profile</button>
