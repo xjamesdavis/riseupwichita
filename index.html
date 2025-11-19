@@ -10,7 +10,7 @@
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="/">
-      <img src="https://i.imgur.com/pbuYHFM.png" alt="Wichita flag" id="brand-img">
+      <img src="/assets/brand.png" alt="Wichita flag" id="brand-img">
       <span class="brand-text">RiseUpWichita</span>
     </a>
     <nav class="main-nav">
@@ -23,8 +23,14 @@
 </header>
 <main class="container">
   <section id="hero" class="hero">
-    <h1>Local jobs. Real work. Fair pay.</h1>
-    <p class="sub">Professional, simple, and focused on getting people hired fast.</p>
+    <video id="hero-video" autoplay muted loop playsinline poster="/assets/hero-poster.jpg">
+      <source src="/assets/hero.mp4" type="video/mp4">
+      <!-- Fallback to a gentle background image if the video does not load -->
+    </video>
+    <div class="hero-content">
+      <h1>Local jobs. Real work. Fair pay.</h1>
+      <p class="sub">Professional, simple, and focused on getting people hired fast.</p>
+    </div>
   </section>
 
   <section id="jobs" class="cards-section">
