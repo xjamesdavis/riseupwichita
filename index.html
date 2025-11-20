@@ -21,8 +21,9 @@
 
   <link rel="canonical" href="https://riseupwichita.com/">
 
-  <!-- IMPORTANT: CACHE-BUSTED STYLESHEET -->
   <link rel="stylesheet" href="assets/styles.css?v=999">
+  <!-- Overrides for hero layout and card 3D pop effect -->
+  <link rel="stylesheet" href="assets/overrides.css?v=3">
 </head>
 
 <body>
@@ -43,8 +44,8 @@
 
 <main>
 
-  <!-- ⭐ FULL-WIDTH / FULL-HEIGHT HERO VIDEO -->
-  <section id="hero" class="hero" aria-labelledby="hero-heading">
+  <!-- FULL-WIDTH HERO VIDEO (stacked layout: video first, heading below) -->
+  <section id="hero" class="hero hero--stacked" aria-labelledby="hero-heading">
 
     <div class="hero-media" aria-hidden="true">
       <video id="hero-video"
@@ -57,10 +58,10 @@
         <source src="https://s3.us-east-2.amazonaws.com/wichita.video.2/wichita+2.mp4" type="video/mp4">
         <img src="assets/hero-poster.jpg" alt="RiseUp Wichita">
       </video>
-      <div class="hero-dim"></div>
+      <div class="hero-dim" aria-hidden="true"></div>
     </div>
 
-    <div class="hero-content">
+    <div class="hero-content" role="region" aria-labelledby="hero-heading">
       <h1 id="hero-heading">Local jobs. Real work. Fair pay.</h1>
       <p class="sub">Professional, simple, and focused on getting people hired fast.</p>
     </div>
@@ -150,6 +151,7 @@
 </div>
 
 <script src="assets/app.js" defer></script>
+<script src="assets/overrides.js" defer></script>
 
 </body>
 </html>
