@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RiseUp Wichita — Jobs</title>
+  <meta name="description" content="Browse local jobs in Wichita.">
+  <link rel="stylesheet" href="assets/styles.css?v=999">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-text">RiseUpWichita</span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="profiles.html">Profiles</a>
+      <a href="index.html#resume" id="resume-link">Resume Builder</a>
+      <button id="cta-create" class="btn primary">Create Profile</button>
+    </nav>
+  </div>
+</header>
+<main>
+  <!-- JOB LISTINGS -->
+  <section id="jobs" class="cards-section container">
+    <div class="section-header">
+      <h2>Job Listings</h2>
+      <p class="muted">Click a job to view details. Contact info is blurred until you create a profile.</p>
+    </div>
+    <div id="jobs-grid" class="grid" aria-live="polite"></div>
+  </section>
+</main>
+<!-- JOB MODAL -->
+<div id="job-modal" class="modal" aria-hidden="true">
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="job-title">
+    <button class="modal-close" id="close-modal" aria-label="Close">×</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
