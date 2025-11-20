@@ -7,40 +7,46 @@
   <meta name="description" content="RiseUp Wichita connects job seekers and employers in Wichita. Build a profile, attach a resume, and find local work with fair pay.">
   <meta name="keywords" content="Wichita jobs, local jobs, resume, gig work, job platform, Wichita KS">
 
-  <!-- Open Graph / Twitter -->
+  <!-- Open Graph / Twitter Card -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="RiseUp Wichita — Local jobs, real work">
   <meta property="og:description" content="Find local work in Wichita. Create a profile, attach your resume, and apply to jobs safely and quickly.">
   <meta property="og:image" content="https://riseupwichita.com/assets/og-image.png">
   <meta property="og:url" content="https://riseupwichita.com">
+
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="RiseUp Wichita — Local jobs, real work">
   <meta name="twitter:description" content="Find local work in Wichita. Create a profile, attach your resume, and apply to jobs safely and quickly.">
   <meta name="twitter:image" content="https://riseupwichita.com/assets/og-image.png">
 
   <link rel="canonical" href="https://riseupwichita.com/">
-  <link rel="stylesheet" href="assets/styles.css">
+
+  <!-- IMPORTANT: CACHE-BUSTED STYLESHEET -->
+  <link rel="stylesheet" href="assets/styles.css?v=999">
 </head>
 
 <body>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/"><span class="brand-text">RiseUpWichita</span></a>
+    <a class="brand" href="/">
+      <span class="brand-text">RiseUpWichita</span>
+    </a>
     <nav class="main-nav" aria-label="Main navigation">
       <a href="#jobs">Jobs</a>
       <a href="#profiles">Profiles</a>
       <a href="#resume" id="resume-link">Resume Builder</a>
       <button id="cta-create" class="btn primary">Create Profile</button>
+      <button id="cta-demo" class="btn">Use Demo Profile</button>
     </nav>
   </div>
 </header>
 
-<main class="container">
+<main>
 
-  <!-- HERO SECTION WITH FIXED VIDEO -->
+  <!-- ⭐ FULL-WIDTH / FULL-HEIGHT HERO VIDEO -->
   <section id="hero" class="hero" aria-labelledby="hero-heading">
-    <div class="hero-media" aria-hidden="true">
 
+    <div class="hero-media" aria-hidden="true">
       <video id="hero-video"
              autoplay
              muted
@@ -51,18 +57,18 @@
         <source src="https://s3.us-east-2.amazonaws.com/wichita.video.2/wichita+2.mp4" type="video/mp4">
         <img src="assets/hero-poster.jpg" alt="RiseUp Wichita">
       </video>
-
-      <div class="hero-dim" aria-hidden="true"></div>
+      <div class="hero-dim"></div>
     </div>
 
     <div class="hero-content">
       <h1 id="hero-heading">Local jobs. Real work. Fair pay.</h1>
       <p class="sub">Professional, simple, and focused on getting people hired fast.</p>
     </div>
+
   </section>
 
   <!-- JOB LISTINGS -->
-  <section id="jobs" class="cards-section">
+  <section id="jobs" class="cards-section container">
     <div class="section-header">
       <h2>Job Listings</h2>
       <p class="muted">Click a job to view details. Contact info is blurred until you create a profile.</p>
@@ -71,7 +77,7 @@
   </section>
 
   <!-- PROFILES -->
-  <section id="profiles" class="cards-section">
+  <section id="profiles" class="cards-section container">
     <div class="section-header">
       <h2>Worker Profiles</h2>
       <p class="muted">Each profile highlights one primary skill and two related specialties.</p>
@@ -80,7 +86,7 @@
   </section>
 
   <!-- RESUME BUILDER -->
-  <section id="resume" class="cards-section">
+  <section id="resume" class="cards-section container">
     <div class="section-header">
       <h2>Resume Builder</h2>
       <p class="muted">You must create a profile to use the resume builder. Profiles can attach a resume that is required to apply.</p>
@@ -104,8 +110,8 @@
 <div id="profile-modal" class="modal" aria-hidden="true">
   <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="create-profile-title">
     <button class="modal-close" id="close-profile-modal" aria-label="Close">×</button>
-
     <h3 id="create-profile-title">Create Your Profile</h3>
+
     <form id="profile-form">
       <label>First name <input name="first" required></label>
       <label>Last name <input name="last" required></label>
@@ -128,8 +134,13 @@
       <label>Specialty #1 <select name="spec1" id="spec1"></select></label>
       <label>Specialty #2 <select name="spec2" id="spec2"></select></label>
 
-      <label>Upload photo (optional) <input name="avatar" id="avatar" type="file" accept="image/*"></label>
-      <label>Upload resume (optional) <input name="resume" type="file"></label>
+      <label>Upload photo (optional)  
+        <input name="avatar" id="avatar" type="file" accept="image/*">
+      </label>
+
+      <label>Upload resume (optional) 
+        <input name="resume" type="file">
+      </label>
 
       <div class="form-actions">
         <button type="submit" class="btn primary">Create profile</button>
