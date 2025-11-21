@@ -484,3 +484,22 @@ main{
     grid-template-columns:repeat(1,1fr);
   }
 }
+/* ===== SECTION DIVIDERS AFTER HERO ===== */
+.cards-section {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.cards-section:nth-of-type(odd) {
+  background: rgba(9,39,84,0.04);
+}
+
+.cards-section:nth-of-type(even) {
+  background: rgba(9,39,84,0.02);
+}
+
+.section-header h2 {
+  font-weight: 800;
+  color: #0b63c6;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
