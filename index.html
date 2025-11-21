@@ -22,8 +22,9 @@
     </nav>
   </div>
 </header>
+
 <main>
-  <!-- FULL-WIDTH HERO VIDEO -->
+  <!-- FULL-VIEWPORT HERO VIDEO -->
   <section id="hero" class="hero hero--stacked" aria-labelledby="hero-heading">
     <div class="hero-media" aria-hidden="true">
       <video id="hero-video"
@@ -38,16 +39,113 @@
       </video>
       <div class="hero-dim" aria-hidden="true"></div>
     </div>
+
     <div class="hero-content" role="region" aria-labelledby="hero-heading">
       <h1 id="hero-heading">Wichita Works When We Work Together.</h1>
       <p class="sub">Connecting real people with real opportunities — together we RISE UP.</p>
-      <div class="hero-ctas" style="margin-top:1.25rem;display:flex;gap:1rem;justify-content:center;">
-        <a class="btn primary" href="jobs.html" style="padding:16px 24px;font-size:1.1rem;border-radius:10px;">Browse Jobs</a>
-        <a class="btn" href="profiles.html" style="padding:16px 24px;font-size:1.1rem;border-radius:10px;">Browse Profiles</a>
+
+      <div class="hero-ctas" style="margin-top:1.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a class="btn primary" href="jobs.html" style="padding:14px 24px;font-size:1.05rem;border-radius:10px;">Find a Job</a>
+        <a class="btn" href="profiles.html" style="padding:14px 24px;font-size:1.05rem;border-radius:10px;">Find a Profile</a>
+      </div>
+
+      <!-- STATS / COUNTERS -->
+      <div class="hero-stats" style="margin-top:1.75rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <div class="card" style="min-width:160px;padding:10px 16px;">
+          <div class="small" style="opacity:0.9;">Jobs Posted</div>
+          <div style="font-size:1.4rem;font-weight:700;">15</div>
+        </div>
+        <div class="card" style="min-width:160px;padding:10px 16px;">
+          <div class="small" style="opacity:0.9;">Worker Profiles</div>
+          <div style="font-size:1.4rem;font-weight:700;">15</div>
+        </div>
+        <div class="card" style="min-width:160px;padding:10px 16px;">
+          <div class="small" style="opacity:0.9;">100% Local</div>
+          <div style="font-size:1.4rem;font-weight:700;">100%</div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- FEATURED JOBS -->
+  <section id="featured-jobs" class="cards-section container">
+    <div class="section-header">
+      <h2>Featured Jobs in Wichita</h2>
+      <p class="muted">Scroll the highlights here, then hit “Jobs” above to see every opening.</p>
+    </div>
+    <div id="jobs-grid" class="grid" aria-live="polite"></div>
+  </section>
+
+  <!-- FEATURED SEEKERS -->
+  <section id="featured-profiles" class="cards-section container">
+    <div class="section-header">
+      <h2>Featured Seekers</h2>
+      <p class="muted">A quick look at local workers ready to go. Click “Profiles” to browse them all.</p>
+    </div>
+    <div id="profiles-grid" class="grid profiles-grid"></div>
+  </section>
+
+  <!-- RESUME BUILDER (BACK ON HOMEPAGE) -->
+  <section id="resume" class="cards-section container">
+    <div class="section-header">
+      <h2>Resume Builder</h2>
+      <p class="muted">Create a free profile, attach a resume, and use this builder to keep it updated.</p>
+    </div>
+    <div class="resume-area">
+      <div id="resume-widget"></div>
+    </div>
+  </section>
 </main>
+
+<!-- PROFILE MODAL (needed for create profile) -->
+<div id="profile-modal" class="modal" aria-hidden="true">
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="create-profile-title">
+    <button class="modal-close" id="close-profile-modal" aria-label="Close">×</button>
+    <h3 id="create-profile-title">Create Your Profile</h3>
+    <form id="profile-form">
+      <label>First name <input name="first" required></label>
+      <label>Last name <input name="last" required></label>
+      <label>Email <input name="email" type="email" required></label>
+      <label>Primary skill
+        <select name="primary" id="primary-select" required>
+          <option value="">Choose a category</option>
+          <option>Construction</option>
+          <option>Graphic Artist</option>
+          <option>Food Service</option>
+          <option>Landscaping</option>
+          <option>Cleaning</option>
+          <option>Delivery</option>
+          <option>Caregiving</option>
+          <option>Handyman</option>
+        </select>
+      </label>
+      <label>Specialty #1
+        <select name="spec1" id="spec1"></select>
+      </label>
+      <label>Specialty #2
+        <select name="spec2" id="spec2"></select>
+      </label>
+      <label>Upload photo (optional)
+        <input name="avatar" id="avatar" type="file" accept="image/*">
+      </label>
+      <label>Upload resume (optional)
+        <input name="resume" type="file">
+      </label>
+      <div class="form-actions">
+        <button type="submit" class="btn primary">Create profile</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- JOB MODAL (for featured jobs on home) -->
+<div id="job-modal" class="modal" aria-hidden="true">
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="job-title">
+    <button class="modal-close" id="close-modal" aria-label="Close">×</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
 <script src="assets/app.js" defer></script>
 </body>
 </html>
