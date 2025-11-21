@@ -225,7 +225,8 @@
     e.preventDefault();
     const f = e.target;
     if(!f) return;
-    const avatarFile = (document.getElementById('avatar') && document.getElementById('avatar').files && document.getElementById('avatar').files[0]) || null;
+    const avatarInput = document.getElementById('avatar');
+    const avatarFile = (avatarInput && avatarInput.files && avatarInput.files[0]) || null;
     const reader = avatarFile ? new FileReader() : null;
     const save = (dataUrl) => {
       const data = {
