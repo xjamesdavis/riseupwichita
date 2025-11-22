@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>RiseUp Wichita — Local jobs, real work</title>
   <meta name="description" content="RiseUp Wichita connects job seekers and employers in Wichita. Build a profile, attach a resume, and find local work with fair pay.">
-  <link rel="stylesheet" href="assets/styles.css?v=1002">
+  <link rel="stylesheet" href="assets/styles.css?v=2002">
 </head>
 
 <body>
@@ -13,8 +13,9 @@
 <!-- ================= GLASS HEADER ================= -->
 <header class="site-header glass-header">
   <div class="container header-inner">
+
     <a class="brand" href="index.html">
-      <img src="assets/logo-wichita-round.png" alt="RiseUp Wichita" class="brand-mark">
+      <img src="assets/logo-no-white.png" alt="RiseUp Wichita" class="brand-mark">
       <span class="brand-text">RiseUpWichita</span>
     </a>
 
@@ -25,18 +26,15 @@
       <a id="resume-link" href="profiles.html#resume">Resume Builder</a>
       <button id="cta-create" class="btn primary">Create Profile</button>
     </nav>
+
   </div>
 </header>
 
-<!-- ================= HERO VIDEO SECTION ================= -->
+<!-- ================= HERO VIDEO ================= -->
 <section id="hero" class="hero hero--video">
   <div class="hero-media">
     <video id="hero-video"
-           autoplay
-           muted
-           loop
-           playsinline
-           preload="auto"
+           autoplay muted loop playsinline preload="auto"
            poster="assets/hero-poster.jpg">
       <source src="https://s3.us-east-2.amazonaws.com/wichita.video.2/wichita+2.mp4" type="video/mp4">
     </video>
@@ -52,58 +50,35 @@
       <a href="profiles.html" class="btn glass btn-lg">Find a Profile</a>
     </div>
 
-    <!-- ====== STATS CIRCLES ====== -->
+    <!-- ====== STATS ====== -->
     <div class="hero-stats">
+
       <a class="stat" href="jobs.html">
         <div class="stat-ring">
-          <div class="stat-circle">
-            <span class="stat-number">15</span>
-          </div>
+          <div class="stat-circle"><span class="stat-number">15</span></div>
         </div>
         <span class="stat-label">Jobs</span>
       </a>
 
       <a class="stat" href="profiles.html">
         <div class="stat-ring">
-          <div class="stat-circle">
-            <span class="stat-number">15</span>
-          </div>
+          <div class="stat-circle"><span class="stat-number">15</span></div>
         </div>
         <span class="stat-label">Profiles</span>
       </a>
 
       <a class="stat" href="index.html">
         <div class="stat-ring">
-          <div class="stat-circle">
-            <span class="stat-number">100%</span>
-          </div>
+          <div class="stat-circle"><span class="stat-number">100%</span></div>
         </div>
         <span class="stat-label">Local</span>
       </a>
+
     </div>
+
   </div>
 </section>
 
-<!-- ================= FEATURED JOBS ================= -->
-<section id="jobs" class="cards-section container">
-  <div class="section-header">
-    <h2>Featured Jobs</h2>
-    <p class="muted">Scroll and click to view details.</p>
-  </div>
-  <div id="jobs-grid" class="grid" aria-live="polite"></div>
-</section>
-
-<!-- ================= FEATURED PROFILES ================= -->
-<section id="profiles" class="cards-section container">
-  <div class="section-header">
-    <h2>Featured Worker Profiles</h2>
-    <p class="muted">Real people in Wichita ready to work.</p>
-  </div>
-  <div id="profiles-grid" class="grid profiles-grid"></div>
-</section>
-
-<!-- ================= JS ================= -->
 <script src="assets/app.js?v=9001" defer></script>
-
 </body>
 </html>
