@@ -3,36 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>RiseUp Wichita — Profiles</title>
-  <meta name="description" content="Browse worker profiles in Wichita.">
-  <link rel="stylesheet" href="assets/styles.css?v=999">
+  <title>Worker Profiles in Wichita | RiseUp Wichita</title>
+  <meta name="description" content="Browse worker profiles in Wichita, KS. See local skills, specialties, and attach a resume to apply for local jobs.">
+  <link rel="stylesheet" href="assets/styles.css?v=3001">
 </head>
 <body>
-<header class="site-header">
+<header class="site-header glass-header">
   <div class="container header-inner">
     <a class="brand" href="index.html">
+      <img src="assets/logo-no-white.png" alt="RiseUp Wichita logo" class="brand-mark">
       <span class="brand-text">RiseUpWichita</span>
     </a>
-    <nav class="main-nav" aria-label="Main navigation">
+    <nav class="main-nav" aria-label="Main">
       <a href="index.html">Home</a>
       <a href="jobs.html">Jobs</a>
       <a href="profiles.html">Profiles</a>
-      <a href="index.html#resume" id="resume-link">Resume Builder</a>
+      <a href="profiles.html#resume" id="resume-link">Resume Builder</a>
       <button id="cta-create" class="btn primary">Create Profile</button>
     </nav>
   </div>
 </header>
-<main>
-  <!-- PROFILES -->
+
+<main class="page-main">
   <section id="profiles" class="cards-section container">
     <div class="section-header">
-      <h2>Worker Profiles</h2>
-      <p class="muted">Each profile highlights one primary skill and two related specialties.</p>
+      <h1>Worker Profiles in Wichita</h1>
+      <p class="muted">Real people in ICT with skills in construction, food service, caregiving, design, delivery, cleaning, and more.</p>
     </div>
     <div id="profiles-grid" class="grid profiles-grid"></div>
   </section>
+
+  <section id="resume" class="cards-section container">
+    <div class="section-header">
+      <h2>Resume Builder</h2>
+      <p class="muted">Create a simple, clean resume that stays attached to your profile so you can apply to local jobs fast.</p>
+    </div>
+    <div class="resume-area">
+      <div id="resume-widget"></div>
+      <p class="small muted" style="margin-top:10px;">Your resume is stored locally in your browser for demo purposes. Future versions will securely save this to your account.</p>
+    </div>
+  </section>
 </main>
-<!-- PROFILE MODAL -->
+
+<!-- Profile Modal -->
 <div id="profile-modal" class="modal" aria-hidden="true">
   <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="create-profile-title">
     <button class="modal-close" id="close-profile-modal" aria-label="Close">×</button>
@@ -68,6 +81,53 @@
     </form>
   </div>
 </div>
-<script src="assets/app.js" defer></script>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-column">
+      <h3 class="footer-heading">Job Boards & Resources</h3>
+      <ul class="footer-links">
+        <li><a href="https://www.indeed.com" target="_blank" rel="noopener">Indeed</a></li>
+        <li><a href="https://www.linkedin.com/jobs" target="_blank" rel="noopener">LinkedIn Jobs</a></li>
+        <li><a href="https://www.ziprecruiter.com" target="_blank" rel="noopener">ZipRecruiter</a></li>
+        <li><a href="https://www.glassdoor.com/Job/index.htm" target="_blank" rel="noopener">Glassdoor</a></li>
+        <li><a href="https://www.snagajob.com" target="_blank" rel="noopener">Snagajob</a></li>
+      </ul>
+      <ul class="footer-links">
+        <li><a href="https://www.simplyhired.com" target="_blank" rel="noopener">SimplyHired</a></li>
+        <li><a href="https://www.monster.com" target="_blank" rel="noopener">Monster</a></li>
+        <li><a href="https://www.usajobs.gov" target="_blank" rel="noopener">USAJobs</a></li>
+        <li><a href="https://www.kansasworks.com" target="_blank" rel="noopener">KANSASWORKS</a></li>
+        <li><a href="https://wichita.craigslist.org/search/jjj" target="_blank" rel="noopener">Craigslist Wichita Jobs</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column footer-center">
+      <h3 class="footer-heading">RiseUp Wichita</h3>
+      <p class="footer-text">
+        James Davis<br>
+        Wichita, Kansas<br>
+        <a href="mailto:james@riseupwichita.com">james@riseupwichita.com</a><br>
+        <a href="https://www.riseupwichita.com">www.riseupwichita.com</a><br>
+        <a href="tel:13163024876">316.302.4876</a>
+      </p>
+      <p class="footer-tagline">Local jobs. Real work. Fair pay. Together, we RISE UP.</p>
+    </div>
+
+    <div class="footer-column footer-right">
+      <h3 class="footer-heading">For Wichita Workers</h3>
+      <p class="footer-text small">
+        Build a simple profile, attach your resume, and start getting in front of local employers and entrepreneurs in ICT. One profile, many opportunities.
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <span class="small">© <span id="year-span"></span> RiseUp Wichita. Built for Wichita, Kansas.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js?v=3001" defer></script>
 </body>
 </html>
