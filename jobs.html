@@ -3,42 +3,91 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>RiseUp Wichita — Jobs</title>
-  <meta name="description" content="Browse local jobs in Wichita.">
-  <link rel="stylesheet" href="assets/styles.css?v=999">
+  <title>Jobs in Wichita | RiseUp Wichita</title>
+  <meta name="description" content="Browse local jobs, gigs, and opportunities in Wichita, KS. Full-time, part-time, temporary, and gig work in the 316.">
+  <link rel="stylesheet" href="assets/styles.css?v=3001">
 </head>
 <body>
-<header class="site-header">
+<header class="site-header glass-header">
   <div class="container header-inner">
     <a class="brand" href="index.html">
+      <img src="assets/logo-no-white.png" alt="RiseUp Wichita logo" class="brand-mark">
       <span class="brand-text">RiseUpWichita</span>
     </a>
-    <nav class="main-nav" aria-label="Main navigation">
+    <nav class="main-nav" aria-label="Main">
       <a href="index.html">Home</a>
       <a href="jobs.html">Jobs</a>
       <a href="profiles.html">Profiles</a>
-      <a href="index.html#resume" id="resume-link">Resume Builder</a>
+      <a href="profiles.html#resume" id="resume-link">Resume Builder</a>
       <button id="cta-create" class="btn primary">Create Profile</button>
     </nav>
   </div>
 </header>
-<main>
-  <!-- JOB LISTINGS -->
+
+<main class="page-main">
   <section id="jobs" class="cards-section container">
     <div class="section-header">
-      <h2>Job Listings</h2>
-      <p class="muted">Click a job to view details. Contact info is blurred until you create a profile.</p>
+      <h1>All Jobs in Wichita</h1>
+      <p class="muted">Full-time, part-time, temporary, and gig work — all focused on ICT and the 316.</p>
     </div>
     <div id="jobs-grid" class="grid" aria-live="polite"></div>
   </section>
 </main>
-<!-- JOB MODAL -->
+
+<!-- Job Modal -->
 <div id="job-modal" class="modal" aria-hidden="true">
   <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="job-title">
     <button class="modal-close" id="close-modal" aria-label="Close">×</button>
     <div id="modal-content"></div>
   </div>
 </div>
-<script src="assets/app.js" defer></script>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-column">
+      <h3 class="footer-heading">Job Boards & Resources</h3>
+      <ul class="footer-links">
+        <li><a href="https://www.indeed.com" target="_blank" rel="noopener">Indeed</a></li>
+        <li><a href="https://www.linkedin.com/jobs" target="_blank" rel="noopener">LinkedIn Jobs</a></li>
+        <li><a href="https://www.ziprecruiter.com" target="_blank" rel="noopener">ZipRecruiter</a></li>
+        <li><a href="https://www.glassdoor.com/Job/index.htm" target="_blank" rel="noopener">Glassdoor</a></li>
+        <li><a href="https://www.snagajob.com" target="_blank" rel="noopener">Snagajob</a></li>
+      </ul>
+      <ul class="footer-links">
+        <li><a href="https://www.simplyhired.com" target="_blank" rel="noopener">SimplyHired</a></li>
+        <li><a href="https://www.monster.com" target="_blank" rel="noopener">Monster</a></li>
+        <li><a href="https://www.usajobs.gov" target="_blank" rel="noopener">USAJobs</a></li>
+        <li><a href="https://www.kansasworks.com" target="_blank" rel="noopener">KANSASWORKS</a></li>
+        <li><a href="https://wichita.craigslist.org/search/jjj" target="_blank" rel="noopener">Craigslist Wichita Jobs</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column footer-center">
+      <h3 class="footer-heading">RiseUp Wichita</h3>
+      <p class="footer-text">
+        James Davis<br>
+        Wichita, Kansas<br>
+        <a href="mailto:james@riseupwichita.com">james@riseupwichita.com</a><br>
+        <a href="https://www.riseupwichita.com">www.riseupwichita.com</a><br>
+        <a href="tel:13163024876">316.302.4876</a>
+      </p>
+      <p class="footer-tagline">Local jobs. Real work. Fair pay. Together, we RISE UP.</p>
+    </div>
+
+    <div class="footer-column footer-right">
+      <h3 class="footer-heading">For Wichita Employers</h3>
+      <p class="footer-text small">
+        Post roles for full-time, part-time, temporary, and gig work in Wichita. Build a pipeline of local talent instead of fishing in national job boards.
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <span class="small">© <span id="year-span"></span> RiseUp Wichita. Built for Wichita, Kansas.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js?v=3001" defer></script>
 </body>
 </html>
