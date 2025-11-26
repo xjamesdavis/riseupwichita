@@ -3,143 +3,176 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
   <title>Together We Rise | RiseUp Wichita Job Board</title>
 
+  <!-- SEO -->
   <meta name="description" content="RiseUp Wichita is a 100% local job board for Wichita and the 316. Find full-time, part-time, temporary and gig work, or hire local talent fast.">
   <meta name="keywords" content="Wichita jobs, Wichita job board, ICT jobs, 316 jobs, Wichita employment, local jobs, job board, gig work, part-time work, full-time work, temporary work, Wichita employers, Wichita opportunity, Wichita entrepreneur, Wichita entrepreneurship, Kansas jobs, local workers, hire in Wichita">
 
+  <!-- OPEN GRAPH -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Together We Rise | RiseUp Wichita">
   <meta property="og:description" content="A 100% local job platform built for Wichita. Find work, post jobs, and connect with real people in the 316.">
   <meta property="og:url" content="https://riseupwichita.com/">
   <meta property="og:image" content="https://riseupwichita.com/assets/og-image.png">
 
+  <!-- TWITTER -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Together We Rise | RiseUp Wichita">
   <meta name="twitter:description" content="Local jobs. Real work. Fair pay. Built in Wichita for the 316.">
   <meta name="twitter:image" content="https://riseupwichita.com/assets/og-image.png">
 
   <link rel="canonical" href="https://riseupwichita.com/">
+
+  <!-- STYLES -->
   <link rel="stylesheet" href="assets/styles.css?v=3001">
 </head>
 
 <body>
+
+<!-- ========================================================= -->
+<!-- HEADER -->
+<!-- ========================================================= -->
 <header class="site-header glass-header">
   <div class="container header-inner">
+
     <a class="brand" href="index.html">
       <img src="assets/logo-no-white.png" alt="RiseUp Wichita logo" class="brand-mark">
       <span class="brand-text">RiseUpWichita</span>
     </a>
 
-    <nav class="main-nav" aria-label="Main">
+    <nav class="main-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="jobs.html">Jobs</a>
       <a href="profiles.html">Profiles</a>
       <a href="profiles.html#resume" id="resume-link">Resume Builder</a>
       <button id="cta-create" class="btn primary">Create Profile</button>
     </nav>
+
   </div>
 </header>
 
+
+<!-- ========================================================= -->
+<!-- HERO VIDEO -->
+<!-- ========================================================= -->
 <main>
-  <!-- ===== HERO VIDEO ===== -->
-  <section id="hero" class="hero hero--video" aria-labelledby="hero-heading">
-    <div class="hero-media" aria-hidden="true">
-      <video id="hero-video"
-             autoplay
-             muted
-             loop
-             playsinline
-             preload="auto"
-             poster="assets/hero-poster.jpg">
-        <source src="https://s3.us-east-2.amazonaws.com/wichita.video.2/wichita+2.mp4" type="video/mp4">
-      </video>
-      <div class="hero-dim"></div>
+
+<section id="hero" class="hero hero--video" aria-labelledby="hero-heading">
+  <div class="hero-media" aria-hidden="true">
+
+    <video id="hero-video"
+           autoplay
+           muted
+           loop
+           playsinline
+           preload="auto"
+           poster="assets/hero-poster.jpg">
+      <source src="https://s3.us-east-2.amazonaws.com/wichita.video.2/wichita+2.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero-dim"></div>
+  </div>
+
+  <div class="hero-inner">
+    <h1 id="hero-heading">Together We Rise</h1>
+    <p class="sub">Wichita works best when Wichitans work together.</p>
+
+    <div class="hero-ctas">
+      <a href="jobs.html" class="btn primary btn-lg">Find a Job</a>
+      <a href="profiles.html" class="btn glass btn-lg">Find a Profile</a>
     </div>
 
-    <div class="hero-inner">
-      <h1 id="hero-heading">Together We Rise</h1>
-      <p class="sub">Wichita works best when Wichitans work together.</p>
-
-      <div class="hero-ctas">
-        <a href="jobs.html" class="btn primary btn-lg">Find a Job</a>
-        <a href="profiles.html" class="btn glass btn-lg">Find a Profile</a>
-      </div>
-
-      <!-- Stats -->
-      <div class="hero-stats">
-        <a class="stat" href="jobs.html">
-          <div class="stat-ring">
-            <div class="stat-circle">
-              <span class="stat-number" data-stat="jobs">15</span>
-            </div>
+    <div class="hero-stats">
+      <a class="stat" href="jobs.html">
+        <div class="stat-ring">
+          <div class="stat-circle">
+            <span class="stat-number" data-stat="jobs">15</span>
           </div>
-          <span class="stat-label">Jobs</span>
-        </a>
+        </div>
+        <span class="stat-label">Jobs</span>
+      </a>
 
-        <a class="stat" href="profiles.html">
-          <div class="stat-ring">
-            <div class="stat-circle">
-              <span class="stat-number" data-stat="profiles">15</span>
-            </div>
+      <a class="stat" href="profiles.html">
+        <div class="stat-ring">
+          <div class="stat-circle">
+            <span class="stat-number" data-stat="profiles">15</span>
           </div>
-          <span class="stat-label">Profiles</span>
-        </a>
+        </div>
+        <span class="stat-label">Profiles</span>
+      </a>
 
-        <a class="stat" href="index.html">
-          <div class="stat-ring">
-            <div class="stat-circle">
-              <span class="stat-number" data-stat="local">100%</span>
-            </div>
+      <a class="stat" href="index.html">
+        <div class="stat-ring">
+          <div class="stat-circle">
+            <span class="stat-number" data-stat="local">100%</span>
           </div>
-          <span class="stat-label">Local</span>
-        </a>
-      </div>
+        </div>
+        <span class="stat-label">Local</span>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===== FEATURED JOBS ===== -->
-  <section id="featured-jobs" class="cards-section container">
-    <div class="section-header">
-      <h2>Featured Jobs in Wichita</h2>
-      <p class="muted">A quick look at real work available right now in the 316.</p>
-    </div>
-    <div id="jobs-grid" class="grid" aria-live="polite"></div>
-    <div class="section-footer-link">
-      <a href="jobs.html" class="link-pill">View all jobs →</a>
-    </div>
-  </section>
 
-  <!-- ===== FEATURED PROFILES ===== -->
-  <section id="featured-profiles" class="cards-section container">
-    <div class="section-header">
-      <h2>Featured Local Workers</h2>
-      <p class="muted">Skilled people in ICT ready for full-time, part-time, gig, and project work.</p>
-    </div>
-    <div id="profiles-grid" class="grid profiles-grid"></div>
-    <div class="section-footer-link">
-      <a href="profiles.html" class="link-pill">Browse all profiles →</a>
-    </div>
-  </section>
+<!-- ========================================================= -->
+<!-- FEATURED JOBS -->
+<!-- ========================================================= -->
+<section id="featured-jobs" class="cards-section container">
+  <div class="section-header">
+    <h2>Featured Jobs in Wichita</h2>
+    <p class="muted">A quick look at real work available right now in the 316.</p>
+  </div>
+
+  <div id="jobs-grid" class="grid" aria-live="polite"></div>
+
+  <div class="section-footer-link">
+    <a href="jobs.html" class="link-pill">View all jobs →</a>
+  </div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- FEATURED PROFILES -->
+<!-- ========================================================= -->
+<section id="featured-profiles" class="cards-section container">
+  <div class="section-header">
+    <h2>Featured Local Workers</h2>
+    <p class="muted">Skilled people in ICT ready for full-time, part-time, gig, and project work.</p>
+  </div>
+
+  <div id="profiles-grid" class="grid profiles-grid"></div>
+
+  <div class="section-footer-link">
+    <a href="profiles.html" class="link-pill">Browse all profiles →</a>
+  </div>
+</section>
+
 </main>
 
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
 <footer class="site-footer">
   <div class="container footer-inner">
+
     <div class="footer-column">
       <h3 class="footer-heading">Job Boards & Resources</h3>
       <ul class="footer-links">
-        <li><a href="https://www.indeed.com" target="_blank" rel="noopener">Indeed</a></li>
-        <li><a href="https://www.linkedin.com/jobs" target="_blank" rel="noopener">LinkedIn Jobs</a></li>
-        <li><a href="https://www.ziprecruiter.com" target="_blank" rel="noopener">ZipRecruiter</a></li>
-        <li><a href="https://www.glassdoor.com/Job/index.htm" target="_blank" rel="noopener">Glassdoor</a></li>
-        <li><a href="https://www.snagajob.com" target="_blank" rel="noopener">Snagajob</a></li>
+        <li><a href="https://www.indeed.com" target="_blank">Indeed</a></li>
+        <li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn Jobs</a></li>
+        <li><a href="https://www.ziprecruiter.com" target="_blank">ZipRecruiter</a></li>
+        <li><a href="https://www.glassdoor.com/Job/index.htm" target="_blank">Glassdoor</a></li>
+        <li><a href="https://www.snagajob.com" target="_blank">Snagajob</a></li>
       </ul>
       <ul class="footer-links">
-        <li><a href="https://www.simplyhired.com" target="_blank" rel="noopener">SimplyHired</a></li>
-        <li><a href="https://www.monster.com" target="_blank" rel="noopener">Monster</a></li>
-        <li><a href="https://www.usajobs.gov" target="_blank" rel="noopener">USAJobs</a></li>
-        <li><a href="https://www.kansasworks.com" target="_blank" rel="noopener">KANSASWORKS</a></li>
-        <li><a href="https://wichita.craigslist.org/search/jjj" target="_blank" rel="noopener">Craigslist Wichita Jobs</a></li>
+        <li><a href="https://www.simplyhired.com" target="_blank">SimplyHired</a></li>
+        <li><a href="https://www.monster.com" target="_blank">Monster</a></li>
+        <li><a href="https://www.usajobs.gov" target="_blank">USAJobs</a></li>
+        <li><a href="https://www.kansasworks.com" target="_blank">KANSASWORKS</a></li>
+        <li><a href="https://wichita.craigslist.org/search/jjj" target="_blank">Craigslist Wichita Jobs</a></li>
       </ul>
     </div>
 
@@ -164,17 +197,20 @@
         Future updates will include direct job posting, employer dashboards, and tools for local entrepreneurs and small businesses.
       </p>
     </div>
+
   </div>
+
   <div class="footer-bottom">
     <div class="container footer-bottom-inner">
       <span class="small">© <span id="year-span"></span> RiseUp Wichita. Built for Wichita, Kansas.</span>
     </div>
   </div>
 </footer>
+
+<!-- ========================================================= -->
+<!-- SCRIPTS (CLEANED) -->
+<!-- ========================================================= -->
 <script src="assets/app.js?v=3001" defer></script>
-</body>
-</html>
-<script type="module" src="assets/firebase.js"></script>
-<script src="assets/app.js" defer></script>
+
 </body>
 </html>
