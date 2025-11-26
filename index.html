@@ -8,7 +8,7 @@
 
   <!-- SEO -->
   <meta name="description" content="RiseUp Wichita is a 100% local job board for Wichita and the 316. Find full-time, part-time, temporary and gig work, or hire local talent fast.">
-  <meta name="keywords" content="Wichita jobs, Wichita job board, ICT jobs, 316 jobs, Wichita employment, local jobs, gig work, temp work, Kansas jobs, Wichita workers, Wichita hiring, Wichita employers">
+  <meta name="keywords" content="Wichita jobs, job board ICT, 316 jobs, Wichita employment, local gigs, Kansas jobs, Wichita workers, Wichita hiring">
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website">
@@ -20,19 +20,19 @@
   <!-- TWITTER -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Together We Rise | RiseUp Wichita">
-  <meta name="twitter:description" content="Local jobs. Real work. Fair pay. Built in Wichita for the 316.">
+  <meta name="twitter:description" content="Local jobs. Real work. Fair pay. Built for Wichita, Kansas.">
   <meta name="twitter:image" content="https://riseupwichita.com/assets/og-image.png">
 
   <link rel="canonical" href="https://riseupwichita.com/">
 
-  <!-- IMPORTANT: Force fresh CSS load -->
-  <link rel="stylesheet" href="assets/styles.css?v=5001">
+  <!-- FORCE FRESH CSS -->
+  <link rel="stylesheet" href="assets/styles.css?v=7001">
 </head>
 
 <body>
 
 <!-- ========================================================= -->
-<!-- HEADER WITH HAMBURGER MENU -->
+<!-- HEADER (GLASS, DESKTOP NAV, MOBILE BURGER ONLY) -->
 <!-- ========================================================= -->
 <header class="site-header glass-header">
   <div class="container header-inner">
@@ -43,21 +43,31 @@
       <span class="brand-text">RiseUpWichita</span>
     </a>
 
-    <!-- Hamburger -->
-    <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <!-- Navigation -->
-    <nav class="main-nav" id="mobile-menu" aria-label="Main navigation">
+    <!-- Desktop Navigation -->
+    <nav class="main-nav desktop-nav">
       <a href="index.html">Home</a>
       <a href="jobs.html">Jobs</a>
       <a href="profiles.html">Profiles</a>
       <a href="profiles.html#resume">Resume Builder</a>
-      <button id="cta-create" class="btn primary">Create Profile</button>
+      <button class="btn primary">Create Profile</button>
     </nav>
 
+    <!-- Mobile Burger -->
+    <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
   </div>
+
+  <!-- Mobile Menu -->
+  <nav class="main-nav mobile-nav" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="profiles.html">Profiles</a>
+    <a href="profiles.html#resume">Resume Builder</a>
+    <button class="btn primary">Create Profile</button>
+  </nav>
+
 </header>
 
 
@@ -69,7 +79,7 @@
 
 <section id="hero" class="hero hero--video" aria-labelledby="hero-heading">
 
-  <div class="hero-media" aria-hidden="true">
+  <div class="hero-media">
     <video id="hero-video"
            autoplay
            muted
@@ -79,7 +89,6 @@
            poster="assets/hero-poster.jpg">
       <source src="https://s3.us-east-2.amazonaws.com/wichita.video.2/wichita+2.mp4" type="video/mp4">
     </video>
-
     <div class="hero-dim"></div>
   </div>
 
@@ -95,29 +104,17 @@
     <div class="hero-stats">
 
       <a class="stat" href="jobs.html">
-        <div class="stat-ring">
-          <div class="stat-circle">
-            <span class="stat-number">15</span>
-          </div>
-        </div>
+        <div class="stat-ring"><div class="stat-circle"><span class="stat-number">15</span></div></div>
         <span class="stat-label">Jobs</span>
       </a>
 
       <a class="stat" href="profiles.html">
-        <div class="stat-ring">
-          <div class="stat-circle">
-            <span class="stat-number">15</span>
-          </div>
-        </div>
+        <div class="stat-ring"><div class="stat-circle"><span class="stat-number">15</span></div></div>
         <span class="stat-label">Profiles</span>
       </a>
 
       <a class="stat" href="#">
-        <div class="stat-ring">
-          <div class="stat-circle">
-            <span class="stat-number">100%</span>
-          </div>
-        </div>
+        <div class="stat-ring"><div class="stat-circle"><span class="stat-number">100%</span></div></div>
         <span class="stat-label">Local</span>
       </a>
 
@@ -137,7 +134,7 @@
     <p class="muted">A quick look at real work available right now in the 316.</p>
   </div>
 
-  <div id="jobs-grid" class="grid" aria-live="polite"></div>
+  <div id="jobs-grid" class="grid"></div>
 
   <div class="section-footer-link">
     <a href="jobs.html" class="link-pill">View all jobs →</a>
@@ -168,43 +165,39 @@
 
 
 <!-- ========================================================= -->
-<!-- FOOTER (3 Equal Columns + Staff Login) -->
+<!-- FOOTER -->
 <!-- ========================================================= -->
 <footer class="site-footer">
   <div class="container footer-inner">
 
-    <!-- Column 1 -->
     <div class="footer-column">
       <h3 class="footer-heading">Job Boards & Resources</h3>
       <ul class="footer-links">
-        <li><a href="https://www.indeed.com" target="_blank">Indeed</a></li>
-        <li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li>
-        <li><a href="https://www.ziprecruiter.com" target="_blank">ZipRecruiter</a></li>
-        <li><a href="https://www.glassdoor.com" target="_blank">Glassdoor</a></li>
-        <li><a href="https://www.snagajob.com" target="_blank">Snagajob</a></li>
+        <li><a href="https://indeed.com" target="_blank">Indeed</a></li>
+        <li><a href="https://linkedin.com/jobs" target="_blank">LinkedIn</a></li>
+        <li><a href="https://ziprecruiter.com" target="_blank">ZipRecruiter</a></li>
+        <li><a href="https://snagajob.com" target="_blank">Snagajob</a></li>
+        <li><a href="https://glassdoor.com" target="_blank">Glassdoor</a></li>
       </ul>
     </div>
 
-    <!-- Column 2 -->
     <div class="footer-column">
       <h3 class="footer-heading">RiseUp Wichita</h3>
       <p class="footer-text">
         James Davis<br>
         Wichita, Kansas<br>
         <a href="mailto:james@riseupwichita.com">james@riseupwichita.com</a><br>
-        <a href="https://www.riseupwichita.com">www.riseupwichita.com</a><br>
+        <a href="https://riseupwichita.com">RiseUpWichita.com</a><br>
         <a href="tel:13163024876">316.302.4876</a>
       </p>
       <p class="footer-tagline">Local jobs. Real work. Fair pay.</p>
     </div>
 
-    <!-- Column 3 -->
     <div class="footer-column">
       <h3 class="footer-heading">For Employers</h3>
       <p class="footer-text small">
-        Post full-time, part-time, gig, or temporary work. Future updates include dashboards and hiring tools.
+        Post full-time, part-time, gig, or temporary work. Dashboards and hiring tools coming soon.
       </p>
-
       <a href="admin.html" class="staff-login">Staff Login →</a>
     </div>
 
@@ -212,7 +205,7 @@
 
   <div class="footer-bottom">
     <div class="container footer-bottom-inner">
-      <span class="small">© <span id="year-span"></span> RiseUp Wichita. Built for Wichita, Kansas.</span>
+      <span class="small">© <span id="year-span"></span> RiseUp Wichita</span>
     </div>
   </div>
 </footer>
@@ -222,7 +215,7 @@
 <!-- ========================================================= -->
 <!-- JS -->
 <!-- ========================================================= -->
-<script src="assets/app.js?v=5001" defer></script>
+<script src="assets/app.js?v=7001" defer></script>
 
 </body>
 </html>
