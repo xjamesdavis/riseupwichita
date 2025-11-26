@@ -8,7 +8,7 @@
 
   <!-- SEO -->
   <meta name="description" content="RiseUp Wichita is a 100% local job board for Wichita and the 316. Find full-time, part-time, temporary and gig work, or hire local talent fast.">
-  <meta name="keywords" content="Wichita jobs, Wichita job board, ICT jobs, 316 jobs, Wichita employment, local jobs, job board, gig work, part-time work, full-time work, temporary work, Wichita employers, Wichita opportunity, Wichita entrepreneur, Wichita entrepreneurship, Kansas jobs, local workers, hire in Wichita">
+  <meta name="keywords" content="Wichita jobs, Wichita job board, ICT jobs, 316 jobs, Wichita employment, local jobs, job board, gig work, part-time work, full-time work, temporary work, Wichita employers, Wichita opportunity, Wichita entrepreneurship, Kansas jobs, local workers, hire in Wichita">
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website">
@@ -26,23 +26,30 @@
   <link rel="canonical" href="https://riseupwichita.com/">
 
   <!-- STYLES -->
-  <link rel="stylesheet" href="assets/styles.css?v=3001">
+  <link rel="stylesheet" href="assets/styles.css?v=4001">
 </head>
 
 <body>
 
 <!-- ========================================================= -->
-<!-- HEADER -->
+<!-- HEADER WITH HAMBURGER MENU -->
 <!-- ========================================================= -->
 <header class="site-header glass-header">
   <div class="container header-inner">
 
+    <!-- Brand -->
     <a class="brand" href="index.html">
       <img src="assets/logo-no-white.png" alt="RiseUp Wichita logo" class="brand-mark">
       <span class="brand-text">RiseUpWichita</span>
     </a>
 
-    <nav class="main-nav" aria-label="Main navigation">
+    <!-- Hamburger -->
+    <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mobile-menu" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="jobs.html">Jobs</a>
       <a href="profiles.html">Profiles</a>
@@ -153,30 +160,25 @@
 
 
 <!-- ========================================================= -->
-<!-- FOOTER -->
+<!-- FOOTER (3 Equal Columns + Staff Login) -->
 <!-- ========================================================= -->
 <footer class="site-footer">
   <div class="container footer-inner">
 
+    <!-- Column 1 -->
     <div class="footer-column">
       <h3 class="footer-heading">Job Boards & Resources</h3>
       <ul class="footer-links">
         <li><a href="https://www.indeed.com" target="_blank">Indeed</a></li>
-        <li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn Jobs</a></li>
+        <li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li>
         <li><a href="https://www.ziprecruiter.com" target="_blank">ZipRecruiter</a></li>
-        <li><a href="https://www.glassdoor.com/Job/index.htm" target="_blank">Glassdoor</a></li>
+        <li><a href="https://www.glassdoor.com" target="_blank">Glassdoor</a></li>
         <li><a href="https://www.snagajob.com" target="_blank">Snagajob</a></li>
-      </ul>
-      <ul class="footer-links">
-        <li><a href="https://www.simplyhired.com" target="_blank">SimplyHired</a></li>
-        <li><a href="https://www.monster.com" target="_blank">Monster</a></li>
-        <li><a href="https://www.usajobs.gov" target="_blank">USAJobs</a></li>
-        <li><a href="https://www.kansasworks.com" target="_blank">KANSASWORKS</a></li>
-        <li><a href="https://wichita.craigslist.org/search/jjj" target="_blank">Craigslist Wichita Jobs</a></li>
       </ul>
     </div>
 
-    <div class="footer-column footer-center">
+    <!-- Column 2 -->
+    <div class="footer-column">
       <h3 class="footer-heading">RiseUp Wichita</h3>
       <p class="footer-text">
         James Davis<br>
@@ -185,17 +187,17 @@
         <a href="https://www.riseupwichita.com">www.riseupwichita.com</a><br>
         <a href="tel:13163024876">316.302.4876</a>
       </p>
-      <p class="footer-tagline">Local jobs. Real work. Fair pay. Together, we RISE UP.</p>
+      <p class="footer-tagline">Local jobs. Real work. Fair pay.</p>
     </div>
 
-    <div class="footer-column footer-right">
-      <h3 class="footer-heading">For Wichita Employers</h3>
+    <!-- Column 3 -->
+    <div class="footer-column">
+      <h3 class="footer-heading">For Employers</h3>
       <p class="footer-text small">
-        Looking to hire in ICT? Use this platform to highlight full-time roles, part-time shifts, temporary work, and gig opportunities — all focused on Wichita and the 316.
+        Post full-time, part-time, gig, or temporary work. Future updates include dashboards and hiring tools.
       </p>
-      <p class="footer-text small">
-        Future updates will include direct job posting, employer dashboards, and tools for local entrepreneurs and small businesses.
-      </p>
+
+      <a href="admin.html" class="staff-login">Staff Login →</a>
     </div>
 
   </div>
@@ -208,9 +210,9 @@
 </footer>
 
 <!-- ========================================================= -->
-<!-- SCRIPTS (CLEANED) -->
+<!-- SCRIPTS -->
 <!-- ========================================================= -->
-<script src="assets/app.js?v=3001" defer></script>
+<script src="assets/app.js?v=4001" defer></script>
 
 </body>
 </html>
