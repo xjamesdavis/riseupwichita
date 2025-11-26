@@ -1,228 +1,477 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+/* ============================================= */
+/* ROOT COLORS & RESET */
+/* ============================================= */
 
-  <title>Together We Rise | RiseUp Wichita Job Board</title>
+:root{
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#0b63c6;
+  --accent-2:#d32f2f;
+  --gold:#fbbf24;
+  --glass:rgba(9,39,84,0.25); /* subtle tint */
+}
 
-  <!-- SEO -->
-  <meta name="description" content="RiseUp Wichita is a 100% local job board for Wichita and the 316. Find full-time, part-time, temporary and gig work, or hire local talent fast.">
-  <meta name="keywords" content="Wichita jobs, Wichita job board, ICT jobs, 316 jobs, Wichita employment, local jobs, gig work, temp work, Kansas jobs, Wichita workers, Wichita hiring, Wichita employers">
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-  <!-- OPEN GRAPH -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Together We Rise | RiseUp Wichita">
-  <meta property="og:description" content="A 100% local job platform built for Wichita. Find work, post jobs, and connect with real people in the 316.">
-  <meta property="og:url" content="https://riseupwichita.com/">
-  <meta property="og:image" content="https://riseupwichita.com/assets/og-image.png">
+body{
+  font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  background:linear-gradient(180deg,#f8fbff,#eaf4ff);
+  color:#042138;
+  padding-top:76px;
+}
 
-  <!-- TWITTER -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Together We Rise | RiseUp Wichita">
-  <meta name="twitter:description" content="Local jobs. Real work. Fair pay. Built in Wichita for the 316.">
-  <meta name="twitter:image" content="https://riseupwichita.com/assets/og-image.png">
-
-  <link rel="canonical" href="https://riseupwichita.com/">
-
-  <!-- IMPORTANT: Force fresh CSS load -->
-  <link rel="stylesheet" href="assets/styles.css?v=5001">
-</head>
-
-<body>
-
-<!-- ========================================================= -->
-<!-- HEADER WITH HAMBURGER MENU -->
-<!-- ========================================================= -->
-<header class="site-header glass-header">
-  <div class="container header-inner">
-
-    <!-- Brand -->
-    <a class="brand" href="index.html">
-      <img src="assets/logo-no-white.png" alt="RiseUp Wichita logo" class="brand-mark">
-      <span class="brand-text">RiseUpWichita</span>
-    </a>
-
-    <!-- Hamburger -->
-    <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <!-- Navigation -->
-    <nav class="main-nav" id="mobile-menu" aria-label="Main navigation">
-      <a href="index.html">Home</a>
-      <a href="jobs.html">Jobs</a>
-      <a href="profiles.html">Profiles</a>
-      <a href="profiles.html#resume">Resume Builder</a>
-      <button id="cta-create" class="btn primary">Create Profile</button>
-    </nav>
-
-  </div>
-</header>
+.container{
+  max-width:1100px;
+  margin:0 auto;
+  padding:16px 24px;
+}
 
 
 
-<!-- ========================================================= -->
-<!-- HERO VIDEO -->
-<!-- ========================================================= -->
-<main>
+/* ============================================= */
+/* HEADER (GLASS, DESKTOP NAV, MOBILE BURGER) */
+/* ============================================= */
 
-<section id="hero" class="hero hero--video" aria-labelledby="hero-heading">
+.site-header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:100;
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 8px 22px rgba(0,0,0,0.35);
+}
 
-  <div class="hero-media" aria-hidden="true">
-    <video id="hero-video"
-           autoplay
-           muted
-           loop
-           playsinline
-           preload="auto"
-           poster="assets/hero-poster.jpg">
-      <source src="https://s3.us-east-2.amazonaws.com/wichita.video.2/wichita+2.mp4" type="video/mp4">
-    </video>
+.header-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    <div class="hero-dim"></div>
-  </div>
+/* LOGO */
 
-  <div class="hero-inner">
-    <h1 id="hero-heading">Together We Rise</h1>
-    <p class="sub">Wichita works best when Wichitans work together.</p>
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+}
 
-    <div class="hero-ctas">
-      <a href="jobs.html" class="btn primary btn-lg">Find a Job</a>
-      <a href="profiles.html" class="btn glass btn-lg">Find a Profile</a>
-    </div>
+.brand-mark{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  object-fit:cover;
+  box-shadow:0 0 0 2px rgba(255,255,255,0.85);
+}
 
-    <div class="hero-stats">
+.brand-text{
+  font-weight:800;
+  font-size:1.1rem;
+  color:#fff;
+}
 
-      <a class="stat" href="jobs.html">
-        <div class="stat-ring">
-          <div class="stat-circle">
-            <span class="stat-number">15</span>
-          </div>
-        </div>
-        <span class="stat-label">Jobs</span>
-      </a>
+/* DESKTOP NAV */
 
-      <a class="stat" href="profiles.html">
-        <div class="stat-ring">
-          <div class="stat-circle">
-            <span class="stat-number">15</span>
-          </div>
-        </div>
-        <span class="stat-label">Profiles</span>
-      </a>
+.desktop-nav{
+  display:flex;
+  gap:14px;
+}
 
-      <a class="stat" href="#">
-        <div class="stat-ring">
-          <div class="stat-circle">
-            <span class="stat-number">100%</span>
-          </div>
-        </div>
-        <span class="stat-label">Local</span>
-      </a>
+.desktop-nav a{
+  color:#e5e7eb;
+  text-decoration:none;
+  font-weight:600;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(15,23,42,0.26);
+  border:1px solid rgba(248,250,252,0.08);
+  transition:0.2s;
+}
 
-    </div>
+.desktop-nav a:hover{
+  background:rgba(255,255,255,0.12);
+  color:white;
+  transform:translateY(-1px);
+}
 
-  </div>
-</section>
+/* BUTTONS */
 
+.btn{
+  padding:8px 14px;
+  border-radius:999px;
+  background:transparent;
+  border:1px solid rgba(248,250,252,0.2);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.2s;
+}
 
+.btn.primary{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  border:none;
+}
 
-<!-- ========================================================= -->
-<!-- FEATURED JOBS -->
-<!-- ========================================================= -->
-<section id="featured-jobs" class="cards-section container">
-  <div class="section-header">
-    <h2>Featured Jobs in Wichita</h2>
-    <p class="muted">A quick look at real work available right now in the 316.</p>
-  </div>
+.btn:hover{
+  transform:translateY(-2px);
+}
 
-  <div id="jobs-grid" class="grid" aria-live="polite"></div>
+.btn-lg{
+  padding:14px 24px;
+  font-size:1.05rem;
+}
 
-  <div class="section-footer-link">
-    <a href="jobs.html" class="link-pill">View all jobs →</a>
-  </div>
-</section>
+.btn.glass{
+  background:rgba(255,255,255,0.18);
+}
 
+/* MOBILE BURGER */
 
+.hamburger{
+  display:none;
+  flex-direction:column;
+  width:34px;
+  height:24px;
+  justify-content:space-between;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
 
-<!-- ========================================================= -->
-<!-- FEATURED PROFILES -->
-<!-- ========================================================= -->
-<section id="featured-profiles" class="cards-section container">
-  <div class="section-header">
-    <h2>Featured Local Workers</h2>
-    <p class="muted">Skilled people in ICT ready for full-time, part-time, gig, and project work.</p>
-  </div>
+.hamburger span{
+  display:block;
+  height:4px;
+  background:#fff;
+  border-radius:4px;
+}
 
-  <div id="profiles-grid" class="grid profiles-grid"></div>
+/* MOBILE NAV */
 
-  <div class="section-footer-link">
-    <a href="profiles.html" class="link-pill">Browse all profiles →</a>
-  </div>
-</section>
+.mobile-nav{
+  display:none;
+  flex-direction:column;
+  background:rgba(9,39,84,0.92);
+  backdrop-filter:blur(18px);
+  padding:20px 0;
+}
 
-
-</main>
-
-
-
-<!-- ========================================================= -->
-<!-- FOOTER (3 Equal Columns + Staff Login) -->
-<!-- ========================================================= -->
-<footer class="site-footer">
-  <div class="container footer-inner">
-
-    <!-- Column 1 -->
-    <div class="footer-column">
-      <h3 class="footer-heading">Job Boards & Resources</h3>
-      <ul class="footer-links">
-        <li><a href="https://www.indeed.com" target="_blank">Indeed</a></li>
-        <li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li>
-        <li><a href="https://www.ziprecruiter.com" target="_blank">ZipRecruiter</a></li>
-        <li><a href="https://www.glassdoor.com" target="_blank">Glassdoor</a></li>
-        <li><a href="https://www.snagajob.com" target="_blank">Snagajob</a></li>
-      </ul>
-    </div>
-
-    <!-- Column 2 -->
-    <div class="footer-column">
-      <h3 class="footer-heading">RiseUp Wichita</h3>
-      <p class="footer-text">
-        James Davis<br>
-        Wichita, Kansas<br>
-        <a href="mailto:james@riseupwichita.com">james@riseupwichita.com</a><br>
-        <a href="https://www.riseupwichita.com">www.riseupwichita.com</a><br>
-        <a href="tel:13163024876">316.302.4876</a>
-      </p>
-      <p class="footer-tagline">Local jobs. Real work. Fair pay.</p>
-    </div>
-
-    <!-- Column 3 -->
-    <div class="footer-column">
-      <h3 class="footer-heading">For Employers</h3>
-      <p class="footer-text small">
-        Post full-time, part-time, gig, or temporary work. Future updates include dashboards and hiring tools.
-      </p>
-
-      <a href="admin.html" class="staff-login">Staff Login →</a>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <div class="container footer-bottom-inner">
-      <span class="small">© <span id="year-span"></span> RiseUp Wichita. Built for Wichita, Kansas.</span>
-    </div>
-  </div>
-</footer>
+.mobile-nav a,
+.mobile-nav .btn{
+  width:82%;
+  margin:4px auto;
+  text-align:center;
+}
 
 
 
-<!-- ========================================================= -->
-<!-- JS -->
-<!-- ========================================================= -->
-<script src="assets/app.js?v=5001" defer></script>
+/* ============================================= */
+/* HERO */
+/* ============================================= */
 
-</body>
-</html>
+.hero{
+  position:relative;
+  color:white;
+  overflow:hidden;
+}
+
+.hero--video{
+  min-height:calc(100vh - 76px);
+}
+
+.hero-media{
+  position:absolute;
+  inset:0;
+  z-index:-2;
+}
+
+.hero-media video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.hero-dim{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+     rgba(0,0,0,0.15),
+     rgba(0,0,0,0.65)
+  );
+  z-index:-1;
+}
+
+.hero-inner{
+  text-align:center;
+  padding:80px 20px 40px;
+  max-width:960px;
+  margin:auto;
+}
+
+.hero h1{
+  font-size:clamp(2.3rem,4vw,3.5rem);
+  font-weight:800;
+  margin-bottom:10px;
+  text-shadow:0 4px 18px rgba(0,0,0,0.85);
+}
+
+.hero .sub{
+  color:#f1f5f9;
+  font-size:1.1rem;
+  margin-bottom:18px;
+  text-shadow:0 3px 14px rgba(0,0,0,0.85);
+}
+
+.hero-ctas{
+  margin-top:20px;
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+
+
+/* ============================================= */
+/* STATS */
+/* ============================================= */
+
+.hero-stats{
+  margin-top:40px;
+  display:flex;
+  justify-content:center;
+  gap:32px;
+  flex-wrap:wrap;
+}
+
+.stat{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-decoration:none;
+  color:white;
+  gap:10px;
+}
+
+.stat-ring{
+  width:142px;
+  height:142px;
+  border-radius:50%;
+  padding:4px;
+  background:conic-gradient(var(--accent),var(--accent-2),var(--gold),var(--accent));
+  box-shadow:0 20px 40px rgba(0,0,0,0.55);
+}
+
+.stat-circle{
+  width:100%;
+  height:100%;
+  background:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  animation:breathe 3.5s infinite ease-in-out;
+}
+
+@keyframes breathe{
+  0%,100%{ transform:scale(1); }
+  50%{ transform:scale(1.04); }
+}
+
+.stat-number{
+  font-size:2.4rem;
+  font-weight:800;
+  color:black;
+}
+
+.stat-label{
+  font-size:0.85rem;
+  text-transform:uppercase;
+  letter-spacing:0.18em;
+}
+
+
+
+/* ============================================= */
+/* FEATURED SECTIONS */
+/* ============================================= */
+
+.cards-section{
+  padding:56px 24px;
+  background:#f8fbff;
+}
+
+.section-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  margin-bottom:16px;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+/* GRID + CARDS */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:white;
+  padding:16px;
+  border-radius:18px;
+  border:1px solid rgba(0,0,0,0.06);
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  transition:0.2s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 16px 40px rgba(0,0,0,0.20);
+}
+
+.card .btn{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  color:white;
+  border:none;
+}
+
+.job-title{
+  font-weight:700;
+}
+
+
+
+/* ============================================= */
+/* PROFILES */
+/* ============================================= */
+
+.profile-avatar{
+  width:84px;
+  height:84px;
+  margin:0 auto 12px;
+  border-radius:50%;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-size:1.3rem;
+  font-weight:700;
+}
+
+
+
+/* ============================================= */
+/* FOOTER */
+/* ============================================= */
+
+.site-footer{
+  background:#020617;
+  color:#e5e7eb;
+  padding:40px 24px 24px;
+}
+
+.footer-inner{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  gap:32px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.footer-links{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.footer-links a{
+  color:#cbd5f5;
+  text-decoration:none;
+}
+
+.footer-links a:hover{
+  color:white;
+  text-decoration:underline;
+}
+
+.footer-tagline{
+  margin-top:8px;
+}
+
+.staff-login{
+  color:#fbbf24;
+  text-decoration:none;
+  font-weight:700;
+  margin-top:16px;
+  display:inline-block;
+}
+
+.staff-login:hover{
+  text-decoration:underline;
+}
+
+.footer-bottom{
+  max-width:1100px;
+  margin:20px auto 0;
+  padding-top:12px;
+  border-top:1px solid rgba(255,255,255,0.15);
+  text-align:center;
+  color:#94a3b8;
+}
+
+
+
+/* ============================================= */
+/* MOBILE RESPONSIVE */
+/* ============================================= */
+
+@media(max-width:768px){
+
+  .desktop-nav{
+    display:none;
+  }
+
+  .hamburger{
+    display:flex;
+  }
+
+  .mobile-nav.show{
+    display:flex;
+  }
+
+  body{
+    padding-top:82px;
+  }
+
+  .hero-inner{
+    padding-top:90px;
+  }
+
+  .hero-stats{
+    gap:20px;
+  }
+
+  .stat-ring{
+    width:120px;
+    height:120px;
+  }
+
+  .footer-inner{
+    grid-template-columns:1fr;
+  }
+}
