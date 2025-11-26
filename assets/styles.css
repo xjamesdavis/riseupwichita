@@ -5,7 +5,7 @@
   --accent:#0b63c6;   /* Wichita blue */
   --accent-2:#d32f2f; /* Wichita red */
   --gold:#fbbf24;     /* keeper / sunset gold */
-  --glass: rgba(9,39,84,0.45);
+  --glass: rgba(255,255,255,0.05); /* ultra-clear glass */
 }
 
 *{
@@ -18,7 +18,9 @@ body{
   font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
   background:linear-gradient(180deg,#f8fbff 0%, #eaf4ff 100%);
   color:#042138;
-  padding-top:76px; /* space for fixed header */
+
+  /* updated to match new compact header */
+  padding-top:68px; 
 }
 
 .container{
@@ -27,16 +29,19 @@ body{
   padding:16px 24px;
 }
 
-/* ============= GLASS HEADER ============= */
+/* ============= GLASS HEADER (UPDATED) ============= */
 .site-header{
   position:fixed;
   top:0; left:0; right:0;
   z-index:40;
-  background:linear-gradient(135deg, rgba(9,39,84,0.82), rgba(9,39,84,0.55));
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(255,255,255,0.18);
-  box-shadow:0 14px 32px rgba(3,7,18,0.55);
+
+  /* CLEAN CLEAR HEADER */
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+
+  border-bottom:1px solid rgba(255,255,255,0.15);
+  box-shadow:0 8px 22px rgba(0,0,0,0.25);
 }
 
 .header-inner{
@@ -71,7 +76,7 @@ body{
   display:flex;
   gap:14px;
   align-items:center;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
   justify-content:flex-end;
 }
 
@@ -122,7 +127,7 @@ body{
   border:1px solid rgba(248,250,252,0.25);
 }
 
-/* ============= HERO VIDEO ============= */
+/* ============= HERO VIDEO (FIXED) ============= */
 .hero{
   position:relative;
   overflow:hidden;
@@ -130,7 +135,7 @@ body{
 }
 
 .hero--video{
-  min-height:calc(100vh - 76px);
+  min-height:calc(100vh - 68px); /* matches new header */
 }
 
 .hero-media{
@@ -143,6 +148,7 @@ body{
   width:100%;
   height:100%;
   object-fit:cover;
+  display:block; /* removes white gaps */
 }
 
 .hero-dim{
@@ -181,7 +187,7 @@ body{
   flex-wrap:wrap;
 }
 
-/* ============= STATS CIRCLES ============= */
+/* ============= STATS ============= */
 .hero-stats{
   margin-top:40px;
   display:flex;
@@ -190,6 +196,7 @@ body{
   flex-wrap:wrap;
 }
 
+/* ... your stats styles unchanged ... */
 .stat{
   text-decoration:none;
   color:#fff;
@@ -210,7 +217,6 @@ body{
     var(--gold),
     var(--accent)
   );
-  /* no rotation – just bright neon ring */
   box-shadow:0 20px 45px rgba(0,0,0,0.65);
 }
 
@@ -222,20 +228,13 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:0 4px 20px rgba(0,0,0,0.2);
   transform-origin:center;
   animation:breathe 3.5s ease-in-out infinite;
 }
 
 @keyframes breathe{
-  0%,100%{
-    transform:scale(1);
-    box-shadow:0 4px 20px rgba(0,0,0,0.20);
-  }
-  50%{
-    transform:scale(1.04);
-    box-shadow:0 10px 30px rgba(0,0,0,0.40);
-  }
+  0%,100%{ transform:scale(1); box-shadow:0 4px 20px rgba(0,0,0,0.20);}
+  50%{ transform:scale(1.04); box-shadow:0 10px 30px rgba(0,0,0,0.40);}
 }
 
 .stat-number{
@@ -251,7 +250,7 @@ body{
   font-weight:700;
 }
 
-/* ============= SECTIONS BELOW HERO ============= */
+/* ============= SECTION CARDS BELOW HERO ============= */
 .cards-section{
   padding:56px 24px 64px;
   background:#f8fbff;
@@ -278,13 +277,6 @@ body{
   font-size:0.9rem;
 }
 
-.section-intro{
-  text-align:center;
-  margin-top:-20px;
-  margin-bottom:32px;
-  color:var(--muted);
-}
-
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
@@ -305,88 +297,6 @@ body{
   box-shadow:0 18px 46px rgba(15,23,42,0.22);
 }
 
-.job-title{
-  font-weight:700;
-  margin-bottom:4px;
-}
-
-.company{
-  color:var(--muted);
-  margin-top:6px;
-}
-
-.company.small{
-  font-size:0.85rem;
-}
-
-.small{
-  font-size:0.85rem;
-}
-
-.card-foot{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:12px;
-  font-size:0.85rem;
-}
-
-.card-actions{
-  display:flex;
-  gap:8px;
-}
-
-/* ============= PROFILES ============= */
-.profiles-grid .card{
-  text-align:center;
-}
-
-.profile-avatar{
-  width:84px;
-  height:84px;
-  border-radius:50%;
-  margin:0 auto 12px;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  color:#fff;
-  font-weight:700;
-  font-size:1.3rem;
-}
-
-.profile-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.profile-name{
-  font-weight:700;
-  margin-bottom:4px;
-}
-
-.profile-primary{
-  font-size:0.9rem;
-  color:var(--muted);
-}
-
-.profile-skills{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:6px;
-  margin-top:8px;
-}
-
-.skill-pill{
-  background:rgba(15,23,42,0.05);
-  border-radius:999px;
-  padding:4px 8px;
-  font-size:0.8rem;
-}
-
 /* ============= FOOTER ============= */
 .site-footer{
   background:#020617;
@@ -399,35 +309,14 @@ body{
   max-width:1100px;
   margin:0 auto;
   display:grid;
-  grid-template-columns:2fr 3fr;
+  grid-template-columns:1fr 1fr;
   gap:32px;
-}
-
-.footer-heading{
-  font-weight:700;
-  margin-bottom:10px;
 }
 
 .footer-links{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:10px 24px;
-}
-
-.footer-links a{
-  color:#cbd5f5;
-  font-size:0.88rem;
-  text-decoration:none;
-}
-
-.footer-links a:hover{
-  color:#fff;
-  text-decoration:underline;
-}
-
-.footer-contact{
-  font-size:0.9rem;
-  line-height:1.5;
 }
 
 .footer-bottom{
@@ -437,26 +326,31 @@ body{
   padding-top:14px;
   font-size:0.8rem;
   color:#94a3b8;
-  display:flex;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:8px;
 }
 
-/* ============= RESPONSIVE ============= */
+/* ============= MOBILE FIXES (CRITICAL) ============= */
 @media(max-width:768px){
-  body{
-    padding-top:82px;
-  }
 
+  /* Header stays small */
   .header-inner{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:10px;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    gap:0;
+    padding:10px 0;
   }
 
   .main-nav{
-    justify-content:flex-start;
+    gap:6px;
+    flex-wrap:nowrap;
+  }
+
+  body{
+    padding-top:68px !important;
+  }
+
+  .hero--video{
+    min-height:calc(100vh - 68px) !important;
   }
 
   .hero-inner{
