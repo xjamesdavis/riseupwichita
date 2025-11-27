@@ -30,7 +30,27 @@
       <h1>Worker Profiles in Wichita</h1>
       <p class="muted">Real people in ICT with skills in construction, food service, caregiving, design, delivery, cleaning, and more.</p>
     </div>
-    <div id="profiles-grid" class="grid profiles-grid"></div>
+    <div id="profiles-grid" class="grid profiles-grid">
+      <!-- DEMO PROFILE #1 -->
+      <div class="card profile-card">
+        <img src="assets/demo-avatar1.png" alt="John Smith" class="profile-avatar">
+        <h3>John Smith</h3>
+        <p class="muted">Construction, Handyman, Delivery</p>
+        <p><b>Email:</b> john.smith@email.com</p>
+        <a href="#" class="btn small">View Resume</a>
+        <a href="#" class="btn small primary">Contact</a>
+      </div>
+      <!-- DEMO PROFILE #2 -->
+      <div class="card profile-card">
+        <img src="assets/demo-avatar2.png" alt="Maria Lopez" class="profile-avatar">
+        <h3>Maria Lopez</h3>
+        <p class="muted">Caregiving, Cleaning, Food Service</p>
+        <p><b>Email:</b> maria.lopez@email.com</p>
+        <a href="#" class="btn small">View Resume</a>
+        <a href="#" class="btn small primary">Contact</a>
+      </div>
+      <!-- Add additional demo profiles below as needed -->
+    </div>
   </section>
 
   <section id="resume" class="cards-section container">
@@ -39,13 +59,22 @@
       <p class="muted">Create a simple, clean resume that stays attached to your profile so you can apply to local jobs fast.</p>
     </div>
     <div class="resume-area">
-      <div id="resume-widget"></div>
+      <!-- Demo Resume Builder Form -->
+      <form id="resume-demo-form">
+        <label>Name <input name="name" required></label>
+        <label>Email <input name="email" type="email" required></label>
+        <label>Relevant Skills <input name="skills"></label>
+        <label>Upload Resume
+          <input name="upload" type="file">
+        </label>
+        <button type="submit" class="btn primary">Save Resume</button>
+      </form>
       <p class="small muted" style="margin-top:10px;">Your resume is stored locally in your browser for demo purposes. Future versions will securely save this to your account.</p>
     </div>
   </section>
 </main>
 
-<!-- Profile Modal -->
+<!-- Profile Modal for creating new profiles (unchanged) -->
 <div id="profile-modal" class="modal" aria-hidden="true">
   <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="create-profile-title">
     <button class="modal-close" id="close-profile-modal" aria-label="Close">×</button>
