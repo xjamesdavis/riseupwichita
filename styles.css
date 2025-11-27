@@ -1,2 +1,162 @@
+/* ------------------------------
+   GLOBAL RESET
+------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f4f7fc;
+  color: #111;
+}
+
+/* ------------------------------
+   HEADER + NAVIGATION
+------------------------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 10px 0;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #111;
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 45px;
+  height: 45px;
+}
+
+/* NAVIGATION BUTTONS */
+
+.main-nav {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.main-nav a,
+#cta-create {
+  display: inline-block;
+  padding: 10px 16px;
+  background: rgba(43, 111, 255, 0.25);     /* Glassy Wichita blue */
+  border: 1px solid rgba(43, 111, 255, 0.45);
+  color: #0d1a3d;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  transition: 0.2s ease;
+}
+
+.main-nav a:hover,
+#cta-create:hover {
+  background: rgba(43, 111, 255, 0.55);
+  color: white;
+}
+
+/* Special styling for Create Profile */
+#cta-create {
+  background: linear-gradient(90deg, #2b6fff, #c42b45);
+  color: white !important;
+}
+
+/* ------------------------------
+   HERO VIDEO SECTION
+------------------------------- */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.hero video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.75) contrast(1.15);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0,0,0,0.1),
+    rgba(0,0,0,0.45)
+  );
+}
+
+.hero-content {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+
+.hero-content h1 {
+  font-size: 3.25rem;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* ------------------------------
+   BUTTONS (GLOBAL)
+------------------------------- */
+
+.btn {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.btn.primary {
+  background: linear-gradient(90deg, #2b6fff, #c42b45);
+  color: white;
+}
+
+.btn.primary:hover {
 /* Original styles from previous commit, restoring previous visual changes */
 /* Add the original styles.css here */
