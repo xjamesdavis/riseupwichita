@@ -1,142 +1,197 @@
-/* ============================================================= */
-/* FOOTER YEAR */
-/* ============================================================= */
-
-const yearSpan = document.getElementById("year-span");
-if (yearSpan) {
-  yearSpan.textContent = new Date().getFullYear();
-}
-
-
-
-/* ============================================================= */
-/* MOBILE HAMBURGER MENU (MOBILE ONLY) */
-/* ============================================================= */
-
-const hamburger = document.getElementById("hamburger");
-const mobileMenu = document.getElementById("mobile-menu");
-
-// Hide burger completely on desktop
-function checkWidth() {
-  if (window.innerWidth > 768) {
-    mobileMenu.classList.remove("show");
-  }
-}
-
-window.addEventListener("resize", checkWidth);
-checkWidth();
-
-if (hamburger && mobileMenu) {
-  hamburger.addEventListener("click", () => {
-    mobileMenu.classList.toggle("show");
-
-    const expanded = mobileMenu.classList.contains("show");
-    hamburger.setAttribute("aria-expanded", expanded ? "true" : "false");
-  });
-}
-
-
-
-/* ============================================================= */
-/* DEMO DATA: JOBS (15) */
-/* ============================================================= */
-
-const demoJobs = [
-  { title:"Warehouse Associate", company:"ICT Logistics", location:"Wichita, KS", type:"Full-time" },
-  { title:"Customer Service Rep", company:"Sunflower Call Center", location:"Remote / Wichita", type:"Part-time" },
-  { title:"Line Cook", company:"Old Town Grill", location:"Downtown Wichita", type:"Evenings" },
-  { title:"Lawn Care Crew", company:"316 Yard Pros", location:"West Wichita", type:"Seasonal" },
-  { title:"Front Desk Clerk", company:"Keeper Inn", location:"Downtown Wichita", type:"Full-time" },
-  { title:"House Painter", company:"RiseUp Painting", location:"Across ICT", type:"Contract" },
-  { title:"Fence Installer", company:"Heartland Fencing", location:"Wichita area", type:"Project work" },
-  { title:"Delivery Driver", company:"Local Eats", location:"Wichita, KS", type:"Gig / Flexible" },
-  { title:"Retail Associate", company:"Towne East Shop", location:"Towne East Mall", type:"Part-time" },
-  { title:"Caretaker", company:"River City Senior Care", location:"East Wichita", type:"Weekends" },
-  { title:"Light Cleaner", company:"ICT Clean Team", location:"Citywide", type:"Nights" },
-  { title:"Data Entry Helper", company:"Back Office 316", location:"Remote", type:"Project" },
-  { title:"Event Setup Crew", company:"Arena Support", location:"Downtown ICT", type:"On-call" },
-  { title:"Dog Walker", company:"Wichita Pet Friends", location:"Neighborhoods across ICT", type:"Gig" },
-  { title:"Handyman", company:"FixIt Wichita", location:"Wichita Metro", type:"Per job" }
-];
-
-
-function renderJobCard(job) {
-  return `
-    <article class="card">
-      <h3 class="job-title">${job.title}</h3>
-      <p class="company">${job.company}</p>
-      <p class="small">${job.location}</p>
-      <div class="card-foot">
-        <span class="small">${job.type}</span>
-        <button class="btn small-btn">Details</button>
-      </div>
-    </article>
-  `;
-}
-
-
-
-/* ============================================================= */
-/* DEMO DATA: PROFILES (15) */
-/* ============================================================= */
-
-const demoProfiles = [
-  { name:"Marcus H.", primary:"Warehouse & Forklift", skills:["Forklift","Inventory","Shipping","Overnights"] },
-  { name:"Sarah L.", primary:"Remote CSR / Sales", skills:["Call Center","Chat Support","CRM","Upselling"] },
-  { name:"Jose R.", primary:"Landscaping & Lawn Care", skills:["Mowing","Trimming","Leaf Cleanup","Snow Removal"] },
-  { name:"Tina K.", primary:"Childcare & Tutor", skills:["K-5 Tutor","Babysitting","Homework Help"] },
-  { name:"Andre P.", primary:"General Labor / Moving", skills:["Loading","Unloading","Furniture Assembly"] },
-  { name:"Emily W.", primary:"Server / Bartender", skills:["POS","Cocktails","Customer Service"] },
-  { name:"Jason D.", primary:"Painting & Drywall", skills:["Interior Paint","Drywall Patch","Prep Work"] },
-  { name:"Nate C.", primary:"IT / Helpdesk", skills:["PC Setup","Troubleshooting","Networking"] },
-  { name:"Haley S.", primary:"House Cleaning", skills:["Deep Clean","Move-out","Weekly"] },
-  { name:"Derrick F.", primary:"Security / Events", skills:["Crowd Control","Night Shift","Patrol"] },
-  { name:"Claire B.", primary:"Office Admin", skills:["Typing","Scheduling","MS Office"] },
-  { name:"Brandon M.", primary:"Construction Helper", skills:["Demo","Site Clean-up","Tools"] },
-  { name:"Lydia G.", primary:"Social Media", skills:["Reels","Content","Branding"] },
-  { name:"Omar J.", primary:"Auto Detailer", skills:["Interior","Exterior","Full Detail"] },
-  { name:"Chloe T.", primary:"Dog Groomer", skills:["Bathing","Nail Trim","Large & Small Breeds"] }
-];
-
-
-function renderProfileCard(profile) {
-  const initials = profile.name
-    .split(" ")
-    .map(word => word[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
-
-  return `
-    <article class="card">
-      <div class="profile-avatar">${initials}</div>
-      <h3 class="profile-name">${profile.name}</h3>
-      <p class="profile-primary">${profile.primary}</p>
-      <div class="profile-skills">
-        ${profile.skills.map(s => `<span class="skill-pill">${s}</span>`).join("")}
-      </div>
-    </article>
-  `;
-}
-
-
-
-/* ============================================================= */
-/* RENDER JOBS + PROFILES ON HOMEPAGE */
-/* ============================================================= */
+// assets/app.js
 
 document.addEventListener("DOMContentLoaded", () => {
+  // ============================================
+  // MOBILE NAV TOGGLE
+  // ============================================
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobile-menu") || document.getElementById("mobileNav");
 
-  // Jobs
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener("click", () => {
+      mobileMenu.classList.toggle("show");
+      const expanded = hamburger.getAttribute("aria-expanded") === "true";
+      hamburger.setAttribute("aria-expanded", String(!expanded));
+    });
+  }
+
+  // ============================================
+  // YEAR IN FOOTER
+  // ============================================
+  const yearSpan = document.getElementById("year-span");
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+  }
+
+  // ============================================
+  // DEMO JOBS
+  // ============================================
   const jobsGrid = document.getElementById("jobs-grid");
+
+  const demoJobs = [
+    { title: "Warehouse Associate", company: "ICT Logistics", type: "Full-time", pay: "$16–18/hr", location: "Wichita, KS" },
+    { title: "Cashier / Customer Service", company: "QuickStop Market", type: "Part-time", pay: "$14/hr", location: "Wichita, KS" },
+    { title: "Line Cook", company: "Old Town Grill", type: "Evenings", pay: "$15–17/hr + tips", location: "Downtown Wichita" },
+    { title: "Lawn Care Crew", company: "316 Green Works", type: "Seasonal", pay: "$17/hr", location: "West Wichita" },
+    { title: "House Cleaner", company: "FreshStart Cleaning", type: "Gig / Flexible", pay: "$20/hr", location: "Wichita Metro" },
+    { title: "Delivery Driver", company: "ICT Courier", type: "Full-time", pay: "$18/hr + mileage", location: "Wichita, KS" },
+    { title: "Caregiver (In-Home)", company: "Sunflower Care", type: "Part-time", pay: "$16–19/hr", location: "East Wichita" },
+    { title: "Dishwasher", company: "Riverfest Bistro", type: "Evenings", pay: "$14/hr", location: "Downtown Wichita" },
+    { title: "Fence Painter", company: "RiseUp Projects", type: "Weekend gig", pay: "$200/day", location: "Wichita, KS" },
+    { title: "Snow Removal / Seasonal", company: "ICT Property Services", type: "On call", pay: "$25/hr", location: "Wichita, KS" },
+    { title: "Front Desk Associate", company: "ICT Fitness", type: "Full-time", pay: "$15/hr", location: "N. Wichita" },
+    { title: "Barista", company: "Keeper Coffee Co.", type: "Part-time", pay: "$12–14/hr + tips", location: "Delano District" },
+    { title: "Dog Walker / Pet Sitter", company: "Wichita Pet Care", type: "Gig / Flexible", pay: "$18–22/hr", location: "Wichita Metro" },
+    { title: "Basic Handyman", company: "Neighbor Help Network", type: "Gig / Project", pay: "$25/hr", location: "316 Area" },
+    { title: "Event Staff", company: "Riverfest Events", type: "Temporary", pay: "$16/hr", location: "Downtown Wichita" }
+  ];
+
   if (jobsGrid) {
-    jobsGrid.innerHTML = demoJobs.slice(0, 6).map(renderJobCard).join("");
+    jobsGrid.innerHTML = "";
+    demoJobs.forEach(job => {
+      const card = document.createElement("div");
+      card.className = "card job-card";
+      card.innerHTML = `
+        <h3 class="job-title">${job.title}</h3>
+        <p class="company">${job.company}</p>
+        <p class="small">${job.type} • ${job.location}</p>
+        <p class="small"><strong>${job.pay}</strong></p>
+        <div class="card-foot">
+          <button class="btn primary btn-sm">I'm Interested</button>
+        </div>
+      `;
+      jobsGrid.appendChild(card);
+    });
   }
 
-  // Profiles
+  // ============================================
+  // DEMO PROFILES + AVATARS
+  // ============================================
   const profilesGrid = document.getElementById("profiles-grid");
-  if (profilesGrid) {
-    profilesGrid.innerHTML = demoProfiles.slice(0, 6).map(renderProfileCard).join("");
+  const avatarPlaceholder = "assets/avatar-placeholder.png";
+
+  const demoProfiles = [
+    { name: "John Smith", role: "Construction, Handyman, Delivery", email: "john.smith@email.com" },
+    { name: "Maria Lopez", role: "Caregiving, Cleaning, Food Service", email: "maria.lopez@email.com" },
+    { name: "Derrick Johnson", role: "Landscaping, Fence Painting", email: "derrick.johnson@email.com" },
+    { name: "Ashley Brown", role: "Childcare, Housekeeping", email: "ashley.brown@email.com" },
+    { name: "Michael Davis", role: "Basic IT, Device Setup", email: "michael.davis@email.com" },
+    { name: "Emily Carter", role: "Social Media, Content Posting", email: "emily.carter@email.com" },
+    { name: "Carlos Hernandez", role: "Warehouse, Forklift Certified", email: "carlos.hdz@email.com" },
+    { name: "Sarah Miller", role: "Front Desk, Admin Support", email: "sarah.miller@email.com" },
+    { name: "Robert White", role: "Painting, Minor Repairs", email: "robert.white@email.com" },
+    { name: "Jessica Lee", role: "Food Service, Event Staff", email: "jessica.lee@email.com" },
+    { name: "Kevin Adams", role: "General Labor, Moving Help", email: "kevin.adams@email.com" },
+    { name: "Olivia Green", role: "Tutoring (K–8)", email: "olivia.green@email.com" },
+    { name: "Andre Thompson", role: "Janitorial, Night Cleaning", email: "andre.thompson@email.com" },
+    { name: "Hannah Wilson", role: "Customer Service, Call Support", email: "hannah.wilson@email.com" },
+    { name: "Marcus Brown", role: "Security, Door Staff", email: "marcus.brown@email.com" }
+  ];
+
+  function renderProfileCard(profile) {
+    const card = document.createElement("div");
+    card.className = "card profile-card";
+    const avatarSrc = profile.avatarUrl || avatarPlaceholder;
+
+    card.innerHTML = `
+      <img src="${avatarSrc}" alt="${profile.name}" class="profile-avatar">
+      <h3>${profile.name}</h3>
+      <p class="muted">${profile.role}</p>
+      <p class="small"><strong>Email:</strong> ${profile.email}</p>
+      <div class="card-foot">
+        <button class="btn small">View Resume</button>
+        <button class="btn primary small">Contact</button>
+      </div>
+    `;
+    return card;
   }
 
+  if (profilesGrid) {
+    profilesGrid.innerHTML = "";
+    demoProfiles.forEach(p => profilesGrid.appendChild(renderProfileCard(p)));
+  }
+
+  // ============================================
+  // CREATE PROFILE MODAL + AVATAR UPLOAD
+  // ============================================
+  const profileModal = document.getElementById("profile-modal");
+  const profileForm = document.getElementById("profile-form");
+  const closeProfileModalBtn = document.getElementById("close-profile-modal");
+
+  // If you have a "Create Profile" button somewhere with id="cta-create"
+  const ctaCreate = document.getElementById("cta-create");
+
+  function openProfileModal() {
+    if (profileModal) profileModal.style.display = "block";
+  }
+
+  function closeProfileModal() {
+    if (profileModal) profileModal.style.display = "none";
+  }
+
+  if (ctaCreate && profileModal) {
+    ctaCreate.addEventListener("click", openProfileModal);
+  }
+
+  if (closeProfileModalBtn) {
+    closeProfileModalBtn.addEventListener("click", closeProfileModal);
+  }
+
+  // Close modal when clicking outside panel
+  if (profileModal) {
+    profileModal.addEventListener("click", (e) => {
+      if (e.target === profileModal) {
+        closeProfileModal();
+      }
+    });
+  }
+
+  // Handle profile form + avatar upload
+  if (profileForm && profilesGrid) {
+    profileForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(profileForm);
+      const first = formData.get("first") || "";
+      const last = formData.get("last") || "";
+      const email = formData.get("email") || "";
+      const primary = formData.get("primary") || "";
+      const spec1 = formData.get("spec1") || "";
+      const spec2 = formData.get("spec2") || "";
+      const avatarFile = formData.get("avatar");
+
+      const fullName = `${first} ${last}`.trim();
+      const roleParts = [primary, spec1, spec2].filter(Boolean);
+      const roleText = roleParts.join(" • ") || "Local worker";
+
+      let avatarUrl = null;
+      if (avatarFile && avatarFile instanceof File && avatarFile.size > 0) {
+        avatarUrl = URL.createObjectURL(avatarFile);
+      }
+
+      const newProfile = {
+        name: fullName || "New Worker",
+        role: roleText,
+        email: email || "N/A",
+        avatarUrl
+      };
+
+      profilesGrid.appendChild(renderProfileCard(newProfile));
+
+      profileForm.reset();
+      closeProfileModal();
+    });
+  }
+
+  // ============================================
+  // RESUME DEMO FORM (LOCAL ONLY)
+  // ============================================
+  const resumeForm = document.getElementById("resume-demo-form");
+  if (resumeForm) {
+    resumeForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      // For now, just prevent reload. In the future, hook this to backend.
+      alert("Your resume info has been captured locally for this demo. In the full version, it will be saved to your profile.");
+    });
+  }
 });
