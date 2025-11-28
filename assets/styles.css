@@ -45,7 +45,7 @@ a {
   width: 100%;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  background: rgba(11, 40, 92, 0.35); /* glassy navy, not white */
+  background: rgba(11, 40, 92, 0.35);
   border-bottom: 1px solid rgba(255, 255, 255, 0.16);
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.45);
 }
@@ -146,7 +146,7 @@ a {
   background: #f9fafb;
 }
 
-/* Mobile nav container, hidden by default */
+/* Mobile nav container */
 .mobile-nav {
   display: none;
   flex-direction: column;
@@ -263,19 +263,6 @@ a {
   transform: translateY(-1px);
 }
 
-/* Option to add logo into buttons later */
-.btn-with-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.btn-with-logo img {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-}
-
 /* ============================================
    HERO STATS
 ============================================ */
@@ -335,7 +322,7 @@ a {
 }
 
 /* ============================================
-   SECTIONS BELOW HERO
+   CARDS (JOBS + PROFILES)
 ============================================ */
 
 .cards-section {
@@ -343,30 +330,19 @@ a {
 }
 
 .section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
-.section-header h1,
-.section-header h2 {
-  font-size: 1.6rem;
-}
-
-/* Grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 18px;
 }
 
-/* Cards (base) */
 .card {
-  background: #ffffff;
+  background: white;
+  padding: 16px;
   border-radius: 18px;
-  padding: 16px 16px 14px;
   border: 1px solid rgba(15,23,42,0.08);
   box-shadow: 0 12px 30px rgba(15,23,42,0.12);
   transition: all 0.18s ease;
@@ -377,59 +353,19 @@ a {
   box-shadow: 0 16px 42px rgba(15,23,42,0.18);
 }
 
-/* ============================================
-   JOB CARDS
-============================================ */
-
-.job-card .job-title {
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.job-card .company {
-  font-size: 0.9rem;
-  color: #6b7280;
-  margin-bottom: 8px;
-}
-
-.job-meta {
-  font-size: 0.86rem;
-  color: #4b5563;
-  margin-bottom: 8px;
-}
-
-.job-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.job-footer .pay {
-  font-weight: 700;
-  color: #0b63c6;
-}
-
-/* ============================================
-   PROFILE CARDS
-============================================ */
-
-.profile-card {
-  text-align: center;
-}
-
+/* Profile avatars */
 .profile-avatar {
   width: 82px;
   height: 82px;
   border-radius: 50%;
-  margin: 0 auto 10px;
+  margin: 0 auto 12px;
   background: radial-gradient(circle at 30% 20%, #fbbf24, #0b63c6, #d32f2f);
+  color: white;
+  font-size: 1.35rem;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #f9fafb;
-  font-weight: 800;
-  font-size: 1.3rem;
   text-transform: uppercase;
   overflow: hidden;
 }
@@ -440,107 +376,6 @@ a {
   object-fit: cover;
 }
 
-.profile-name {
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.profile-primary {
-  font-size: 0.9rem;
-  color: #6b7280;
-}
-
-.profile-skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  justify-content: center;
-  margin-top: 8px;
-}
-
-.skill-pill {
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: rgba(15,23,42,0.05);
-  font-size: 0.78rem;
-  color: #374151;
-}
-
-.profile-actions {
-  margin-top: 10px;
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-}
-
-/* ============================================
-   MODAL (for Hire Me / Apply)
-============================================ */
-
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.55);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 60;
-}
-
-.modal.show {
-  display: flex;
-}
-
-.modal-panel {
-  background: #ffffff;
-  border-radius: 18px;
-  max-width: 460px;
-  width: 100%;
-  padding: 20px 20px 18px;
-  position: relative;
-  box-shadow: 0 24px 60px rgba(15,23,42,0.35);
-}
-
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  border: none;
-  background: none;
-  font-size: 1.3rem;
-  cursor: pointer;
-}
-
-/* Form inside modal */
-.modal-panel form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.modal-panel label {
-  font-size: 0.88rem;
-  color: #374151;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.modal-panel input,
-.modal-panel textarea,
-.modal-panel select {
-  padding: 8px 10px;
-  border-radius: 10px;
-  border: 1px solid rgba(148,163,184,0.8);
-  font-size: 0.9rem;
-}
-
-.modal-panel textarea {
-  min-height: 80px;
-  resize: vertical;
-}
-
 /* ============================================
    FOOTER
 ============================================ */
@@ -548,7 +383,6 @@ a {
 .site-footer {
   background: #020617;
   color: #e5e7eb;
-  margin-top: 40px;
   padding: 40px 24px 20px;
 }
 
@@ -567,41 +401,19 @@ a {
 
 .footer-links {
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 6px 16px;
-  margin-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .footer-links a {
   color: #cbd5f5;
-  font-size: 0.84rem;
   text-decoration: none;
+  font-size: 0.85rem;
 }
 
 .footer-links a:hover {
   color: #f9fafb;
-  text-decoration: underline;
-}
-
-.footer-text {
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.footer-tagline {
-  margin-top: 6px;
-}
-
-.staff-login {
-  display: inline-block;
-  margin-top: 10px;
-  color: #fbbf24;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.staff-login:hover {
   text-decoration: underline;
 }
 
@@ -622,11 +434,10 @@ a {
 @media (max-width: 768px) {
   .header-inner {
     flex-direction: row;
-    gap: 8px;
   }
 
   .main-nav {
-    display: none; /* hide desktop nav on mobile */
+    display: none;
   }
 
   .hamburger {
@@ -641,10 +452,6 @@ a {
     padding-top: 90px;
   }
 
-  .hero-stats {
-    gap: 18px;
-  }
-
   .stat-ring {
     width: 120px;
     height: 120px;
@@ -652,9 +459,5 @@ a {
 
   .footer-inner {
     grid-template-columns: 1fr;
-  }
-
-  .footer-links {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
