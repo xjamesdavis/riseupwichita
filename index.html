@@ -25,8 +25,8 @@
 
   <link rel="canonical" href="https://riseupwichita.com/">
 
-  <!-- MAIN SITE CSS -->
-  <link rel="stylesheet" href="assets/styles.new.css?v=9001">
+  <!-- MAIN SITE CSS (same as other pages) -->
+  <link rel="stylesheet" href="assets/styles.css?v=3001">
 </head>
 
 <body>
@@ -44,12 +44,12 @@
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="main-nav desktop-nav">
+    <nav class="main-nav desktop-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="jobs.html">Jobs</a>
       <a href="profiles.html">Profiles</a>
       <a href="profiles.html#resume">Resume Builder</a>
-      <button class="btn primary">Create Profile</button>
+      <button class="btn primary" id="nav-create-profile">Create Profile</button>
     </nav>
 
     <!-- Mobile Burger -->
@@ -60,12 +60,12 @@
   </div>
 
   <!-- Mobile Menu -->
-  <nav class="main-nav mobile-nav" id="mobile-menu">
+  <nav class="main-nav mobile-nav" id="mobile-menu" aria-label="Mobile navigation">
     <a href="index.html">Home</a>
     <a href="jobs.html">Jobs</a>
     <a href="profiles.html">Profiles</a>
     <a href="profiles.html#resume">Resume Builder</a>
-    <button class="btn primary">Create Profile</button>
+    <button class="btn primary" id="mobile-create-profile">Create Profile</button>
   </nav>
 
 </header>
@@ -173,11 +173,11 @@
     <div class="footer-column">
       <h3 class="footer-heading">Job Boards & Resources</h3>
       <ul class="footer-links">
-        <li><a href="https://indeed.com" target="_blank">Indeed</a></li>
-        <li><a href="https://linkedin.com/jobs" target="_blank">LinkedIn</a></li>
-        <li><a href="https://ziprecruiter.com" target="_blank">ZipRecruiter</a></li>
-        <li><a href="https://snagajob.com" target="_blank">Snagajob</a></li>
-        <li><a href="https://glassdoor.com" target="_blank">Glassdoor</a></li>
+        <li><a href="https://indeed.com" target="_blank" rel="noopener">Indeed</a></li>
+        <li><a href="https://linkedin.com/jobs" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://ziprecruiter.com" target="_blank" rel="noopener">ZipRecruiter</a></li>
+        <li><a href="https://snagajob.com" target="_blank" rel="noopener">Snagajob</a></li>
+        <li><a href="https://glassdoor.com" target="_blank" rel="noopener">Glassdoor</a></li>
       </ul>
     </div>
 
